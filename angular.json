@@ -122,6 +122,46 @@
           }
         }
       }
+    },
+    "zcomponents": {
+      "projectType": "library",
+      "root": "projects/zcomponents",
+      "sourceRoot": "projects/zcomponents/src",
+      "prefix": "lib",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:ng-packagr",
+          "options": {
+            "tsConfig": "projects/zcomponents/tsconfig.lib.json",
+            "project": "projects/zcomponents/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "projects/zcomponents/tsconfig.lib.prod.json"
+            }
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/zcomponents/src/test.ts",
+            "tsConfig": "projects/zcomponents/tsconfig.spec.json",
+            "karmaConfig": "projects/zcomponents/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/zcomponents/tsconfig.lib.json",
+              "projects/zcomponents/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
     }
   },
   "defaultProject": "zcomponents-app"
