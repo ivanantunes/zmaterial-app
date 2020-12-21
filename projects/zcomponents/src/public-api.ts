@@ -1,7 +1,3 @@
-/*
- * Public API Surface of zcomponents
- */
+// ! z-modal
+export * from './lib/z-modal/index';
 
-export * from './lib/zcomponents.service';
-export * from './lib/zcomponents.component';
-export * from './lib/zcomponents.module';
