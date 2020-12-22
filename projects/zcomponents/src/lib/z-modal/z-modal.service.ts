@@ -1,7 +1,15 @@
 import { Injectable } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Observable } from 'rxjs';
-import { ZModalBase, ZModalConfirm, ZModalLog, ZModalType } from './interfaces';
+import {
+  ZModalBase,
+  ZModalConfirm,
+  ZModalLog,
+  ZModalType,
+  ZModalManual,
+  ZModalManualLog,
+  ZModalManualConfirm
+} from './interfaces';
 import { ZModalComponent } from './z-modal.component';
 
 @Injectable({
@@ -207,6 +215,77 @@ export class ZModalService {
         description: config.base.description,
         btnCloseTitle: config.base.btnCloseTitle,
         btnConfirmTitle: config.btnConfirmTitle
+      }
+    });
+
+    return resp.componentInstance.isConfirmed;
+  }
+
+  /**
+   * Execute the Manual Modal.
+   *
+   * @author Ivan Antunes <ivanantnes75@gmail.com>
+   * @copyright z-components
+   */
+  public zModalManual(config: ZModalManual): void {
+    this.dialog.open(ZModalComponent, {
+      width: config.base.width,
+      height: config.base.height,
+      disableClose: config.base.isDisableClose,
+      data: {
+        controlType: ZModalType.M_ALERT,
+        title: config.base.title,
+        description: config.base.description,
+        btnCloseTitle: config.base.btnCloseTitle,
+        icon: config.icon,
+        backgroundColor: config.backgroundColor
+      },
+    });
+  }
+
+  /**
+   * Execute the Manual Log Modal.
+   *
+   * @author Ivan Antunes <ivanantnes75@gmail.com>
+   * @copyright z-components
+   */
+  public zModalManualLog(config: ZModalManualLog): void {
+    this.dialog.open(ZModalComponent, {
+      width: config.base.base.width,
+      height: config.base.base.height,
+      disableClose: config.base.base.isDisableClose,
+      data: {
+        controlType: ZModalType.M_ALERT_LOG,
+        title: config.base.base.title,
+        description: config.base.base.description,
+        btnCloseTitle: config.base.base.btnCloseTitle,
+        btnLogTitle: config.btnLogTitle,
+        log: config.log,
+        icon: config.base.icon,
+        backgroundColor: config.base.backgroundColor
+      }
+    });
+  }
+
+  /**
+   * Execute the Manual Confirm Modal.
+   *
+   * @author Ivan Antunes <ivanantnes75@gmail.com>
+   * @copyright z-components
+   */
+  public zModalManualConfirm(config: ZModalManualConfirm): Observable<boolean> {
+    const resp = this.dialog.open(ZModalComponent, {
+      width: config.base.base.width,
+      height: config.base.base.height,
+      disableClose: config.base.base.isDisableClose,
+      data: {
+        controlType: ZModalType.M_ALERT_CONFIRM,
+        title: config.base.base.title,
+        description: config.base.base.description,
+        btnCloseTitle: config.base.base.btnCloseTitle,
+        btnConfirmTitle: config.btnConfirmTitle,
+        icon: config.base.icon,
+        backgroundColor: config.base.backgroundColor
       }
     });
 

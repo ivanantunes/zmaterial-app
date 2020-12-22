@@ -1,11 +1,6 @@
-<div [ngSwitch]="modal.controlType">
-
-  <!-- ! Modal Template -->
-
   <div>
 
-    <svg viewBox="0 0 130.2 130.2"
-         *ngIf="modal.controlType === 'T_SUCCESS' ||
+    <svg viewBox="0 0 130.2 130.2" *ngIf="modal.controlType === 'T_SUCCESS' ||
                 modal.controlType === 'T_SUCCESS_LOG' ||
                 modal.controlType === 'T_SUCCESS_CONFIRM'">
       <circle class="path circle" fill="none" stroke="#73AF55" stroke-width="6" stroke-miterlimit="10" cx="65.1"
@@ -14,8 +9,7 @@
         stroke-miterlimit="10" points="100.2,40.2 51.5,88.8 29.8,67.5 " />
     </svg>
 
-    <svg viewBox="0 0 130.2 130.2"
-         *ngIf="modal.controlType === 'T_WARNING' ||
+    <svg viewBox="0 0 130.2 130.2" *ngIf="modal.controlType === 'T_WARNING' ||
                 modal.controlType === 'T_WARNING_LOG' ||
                 modal.controlType === 'T_WARNING_CONFIRM'">
       <circle class="path circle" fill="none" stroke="#cccc00" stroke-width="6" stroke-miterlimit="10" cx="65.1"
@@ -32,8 +26,7 @@
         stroke-miterlimit="10" x1="65" y1="80" x2="65" y2="80" />
     </svg>
 
-    <svg viewBox="0 0 130.2 130.2"
-         *ngIf="modal.controlType === 'T_ERROR' ||
+    <svg viewBox="0 0 130.2 130.2" *ngIf="modal.controlType === 'T_ERROR' ||
                 modal.controlType === 'T_ERROR_LOG' ||
                 modal.controlType === 'T_ERROR_CONFIRM'">
       <circle class="path circle" fill="none" stroke="#D06079" stroke-width="6" stroke-miterlimit="10" cx="65.1"
@@ -44,6 +37,16 @@
         stroke-miterlimit="10" x1="95.8" y1="38" x2="34.4" y2="92.2" />
     </svg>
 
+    <div *ngIf="modal.controlType === 'M_ALERT' ||
+                modal.controlType === 'M_ALERT_LOG' ||
+                modal.controlType === 'M_ALERT_CONFIRM'">
+
+      <div class="modal-header-manual">
+        <div [style.border-color]="modal.backgroundColor">
+          <mat-icon [style.color]="modal.backgroundColor" class="modal-body-manual">{{modal.icon}}</mat-icon>
+        </div>
+      </div>
+
     <div class="modal-header">
       <span class="modal-header-title">{{modal.title}}</span>
       <p class="modal-header-description">{{modal.description}}</p>
@@ -52,49 +55,47 @@
     <div *ngIf="showLog &&
                 (modal.controlType === 'T_SUCCESS_LOG' ||
                 modal.controlType === 'T_WARNING_LOG' ||
-                modal.controlType === 'T_ERROR_LOG')" class="modal-body-container-log">
+                modal.controlType === 'T_ERROR_LOG' ||
+                modal.controlType === 'M_ALERT_LOG')" class="modal-body-container-log">
       <p class="modal-header-description">{{modal.log}}</p>
     </div>
 
     <div mat-dialog-actions>
 
-      <button mat-raised-button
-      *ngIf="modal.controlType === 'T_SUCCESS_LOG' ||
-            modal.controlType === 'T_WARNING_LOG' ||
-            modal.controlType === 'T_ERROR_LOG'"
-      (click)="showLog = !showLog"
-      color="primary" class="modal-body-button">
+      <button mat-raised-button *ngIf="modal.controlType === 'T_SUCCESS_LOG' ||
+                                        modal.controlType === 'T_WARNING_LOG' ||
+                                        modal.controlType === 'T_ERROR_LOG' ||
+                                        modal.controlType === 'M_ALERT_LOG'"
+        (click)="showLog = !showLog" color="primary"
+        class="modal-body-button">
         <mat-icon class="modal-body-icon">help_outline</mat-icon> {{modal.btnLogTitle}}
       </button>
-      <button mat-raised-button
-      *ngIf="modal.controlType === 'T_SUCCESS_LOG' ||
+      <button mat-raised-button *ngIf="modal.controlType === 'T_SUCCESS_LOG' ||
               modal.controlType === 'T_SUCCESS' ||
               modal.controlType === 'T_WARNING_LOG' ||
               modal.controlType === 'T_WARNING' ||
               modal.controlType === 'T_ERROR_LOG' ||
-              modal.controlType === 'T_ERROR'"
-      (click)="close()"
-      color="warn"
-      class="modal-body-button">
+              modal.controlType === 'T_ERROR' ||
+              modal.controlType === 'M_ALERT_LOG' ||
+              modal.controlType === 'M_ALERT'" (click)="close()" color="warn" class="modal-body-button">
         <mat-icon class="modal-body-icon">close</mat-icon> {{modal.btnCloseTitle}}
       </button>
 
-      <button mat-raised-button
-      *ngIf="modal.controlType === 'T_SUCCESS_CONFIRM' ||
-              modal.controlType === 'T_WARNING_CONFIRM' ||
-              modal.controlType === 'T_ERROR_CONFIRM'"
-      (click)="acceptConfirm()" color="primary" class="modal-body-button">
+      <button mat-raised-button *ngIf="modal.controlType === 'T_SUCCESS_CONFIRM' ||
+                                        modal.controlType === 'T_WARNING_CONFIRM' ||
+                                        modal.controlType === 'M_ALERT_CONFIRM' ||
+                                        modal.controlType === 'T_ERROR_CONFIRM'"
+        (click)="acceptConfirm()" color="primary"
+        class="modal-body-button">
         <mat-icon class="modal-body-icon">done</mat-icon> {{modal.btnConfirmTitle}}
       </button>
-      <button mat-raised-button
-      *ngIf="modal.controlType === 'T_SUCCESS_CONFIRM' ||
-              modal.controlType === 'T_WARNING_CONFIRM' ||
-              modal.controlType === 'T_ERROR_CONFIRM'"
-      (click)="closeConfirm()" color="warn" class="modal-body-button">
+      <button mat-raised-button *ngIf="modal.controlType === 'T_SUCCESS_CONFIRM' ||
+                                        modal.controlType === 'T_WARNING_CONFIRM' ||
+                                        modal.controlType === 'M_ALERT_CONFIRM' ||
+                                        modal.controlType === 'T_ERROR_CONFIRM'"
+        (click)="closeConfirm()" color="warn" class="modal-body-button">
         <mat-icon class="modal-body-icon">close</mat-icon> {{modal.btnCloseTitle}}
       </button>
     </div>
 
   </div>
-
-</div>

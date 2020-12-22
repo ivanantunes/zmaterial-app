@@ -7,9 +7,5 @@ import { ZModalService } from 'zcomponents';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  constructor(private zModal: ZModalService) {
-
-
-
-  }
+  constructor(private zModal: ZModalService) {}
 }
