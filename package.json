@@ -1,6 +1,6 @@
 {
   "name": "zcomponents-app",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "scripts": {
     "postversion": "git push && git push --tags",
     "verison:patch": "npm version patch && cd projects/zcomponents/ && npm version patch && cd .. && cd ..",
