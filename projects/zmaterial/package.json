@@ -1,6 +1,32 @@
 {
   "name": "zmaterial",
-  "version": "0.0.5",
+  "description": "A components developed based on the angular material. Containing customizable and templete.",
+  "version": "0.0.6",
+  "author": {
+    "email": "ivanantnes75@gmail.com",
+    "name": "Ivan Antunes",
+    "url": "http://github.com/ivanantunes/"
+  },
+  "repository": {
+    "type": "git",
+    "directory": "zmaterial-app",
+    "url": "https://github.com/ivanantunes/zmaterial-app.git"
+  },
+  "bugs": {
+    "email": "ivanantnes75@gmail.com",
+    "url": "https://github.com/ivanantunes/zmaterial-app/issues"
+  },
+  "homepage": "https://github.com/ivanantunes/zmaterial-app",
+  "keywords": [
+    "angular",
+    "javascript",
+    "typescript",
+    "zmaterial",
+    "material",
+    "components",
+    "templates"
+  ],
+  "license": "MIT",
   "peerDependencies": {
     "@angular/common": "~11.1.2",
     "@angular/core": "~11.1.2",
