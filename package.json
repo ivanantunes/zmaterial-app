@@ -6,7 +6,7 @@
     "verison:patch": "npm version patch && cd projects/zcomponents/ && npm version patch && cd .. && cd ..",
     "verison:minor": "npm version minor && cd projects/zcomponents/ && npm version minor && cd .. && cd ..",
     "verison:major": "npm version major && cd projects/zcomponents/ && npm version major && cd .. && cd ..",
-    "publish": "cd dist/zcomponents/ && npm publish && cd .. && cd ..",
+    "publish": "cd dist/zmaterial/ && npm publish && cd .. && cd ..",
     "dist:patch": "npm run verison:patch && npm run postversion && npm run build:prod && npm run publish",
     "dist:minor": "npm run verison:minor && npm run postversion && npm run build:prod && npm run publish",
     "dist:major": "npm run verison:major && npm run postversion && npm run build:prod && npm run publish",
