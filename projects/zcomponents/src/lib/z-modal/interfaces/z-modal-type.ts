@@ -1,0 +1,25 @@
+export enum ZModalType {
+  // Template Success
+
+  T_SUCCESS = 'T_SUCCESS',
+  T_SUCCESS_LOG = 'T_SUCCESS_LOG',
+  T_SUCCESS_CONFIRM = 'T_SUCCESS_CONFIRM',
+
+  // Template Warning
+
+  T_WARNING = 'T_WARNING',
+  T_WARNING_LOG = 'T_WARNING_LOG',
+  T_WARNING_CONFIRM = 'T_WARNING_CONFIRM',
+
+  // Template Error
+
+  T_ERROR = 'T_ERROR',
+  T_ERROR_LOG = 'T_ERROR_LOG',
+  T_ERROR_CONFIRM = 'T_ERROR_CONFIRM',
+
+  // Template Manual
+
+  M_ALERT = 'M_ALERT',
+  M_ALERT_LOG = 'M_ALERT_LOG',
+  M_ALERT_CONFIRM = 'M_ALERT_CONFIRM'
+}

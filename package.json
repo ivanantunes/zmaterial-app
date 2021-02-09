@@ -7,6 +7,7 @@
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
+    "watch-mod": "ng build zcomponents --watch",
     "e2e": "ng e2e"
   },
   "private": true,
@@ -19,6 +20,9 @@
     "@angular/platform-browser": "~11.1.2",
     "@angular/platform-browser-dynamic": "~11.1.2",
     "@angular/router": "~11.1.2",
+    "@angular/cdk": "^11.0.3",
+    "@angular/flex-layout": "^11.0.0-beta.33",
+    "@angular/material": "^11.0.3",
     "rxjs": "~6.6.0",
     "tslib": "^2.0.0",
     "zone.js": "~0.10.2"
