@@ -1,6 +1,6 @@
 {
   "name": "zmaterial-app",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "scripts": {
     "postversion": "git push && git push --tags",
     "verison:patch": "npm version patch && cd projects/zmaterial/ && npm version patch && cd .. && cd ..",
