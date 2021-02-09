@@ -1,24 +1,18 @@
 {
   "name": "zcomponents-app",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "scripts": {
     "postversion": "git push && git push --tags",
-
     "verison:patch": "npm version patch && cd projects/zcomponents/ && npm version patch && cd .. && cd ..",
     "verison:minor": "npm version minor && cd projects/zcomponents/ && npm version minor && cd .. && cd ..",
     "verison:major": "npm version major && cd projects/zcomponents/ && npm version major && cd .. && cd ..",
-
     "publish": "cd dist/zcomponents/ && npm publish && cd .. && cd ..",
-
     "dist:patch": "npm run verison:patch && npm run build:prod && npm run publish && npm run postversion",
     "dist:minor": "npm run verison:minor && npm run build:prod && npm run publish && npm run postversion",
     "dist:major": "npm run verison:major && npm run build:prod && npm run publish && npm run postversion",
-
     "start": "ng serve",
-
     "build:app": "ng build",
     "build:prod": "ng build modal-material --prod",
-
     "watch-mod": "ng build zcomponents --watch"
   },
   "private": true,
