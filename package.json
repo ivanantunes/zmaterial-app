@@ -2,27 +2,38 @@
   "name": "zcomponents-app",
   "version": "0.0.0",
   "scripts": {
-    "ng": "ng",
+    "postversion": "git push && git push --tags",
+
+    "verison:patch": "npm version patch && cd projects/zcomponents/ && npm version patch && cd .. && cd ..",
+    "verison:minor": "npm version minor && cd projects/zcomponents/ && npm version minor && cd .. && cd ..",
+    "verison:major": "npm version major && cd projects/zcomponents/ && npm version major && cd .. && cd ..",
+
+    "publish": "cd dist/zcomponents/ && npm publish && cd .. && cd ..",
+
+    "dist:patch": "npm run verison:patch && npm run build:prod && npm run publish && npm run postversion",
+    "dist:minor": "npm run verison:minor && npm run build:prod && npm run publish && npm run postversion",
+    "dist:major": "npm run verison:major && npm run build:prod && npm run publish && npm run postversion",
+
     "start": "ng serve",
-    "build": "ng build",
-    "test": "ng test",
-    "lint": "ng lint",
-    "watch-mod": "ng build zcomponents --watch",
-    "e2e": "ng e2e"
+
+    "build:app": "ng build",
+    "build:prod": "ng build modal-material --prod",
+
+    "watch-mod": "ng build zcomponents --watch"
   },
   "private": true,
   "dependencies": {
     "@angular/animations": "~11.1.2",
+    "@angular/cdk": "^11.1.1",
     "@angular/common": "~11.1.2",
     "@angular/compiler": "~11.1.2",
     "@angular/core": "~11.1.2",
+    "@angular/flex-layout": "^11.0.0-beta.33",
     "@angular/forms": "~11.1.2",
+    "@angular/material": "^11.1.1",
     "@angular/platform-browser": "~11.1.2",
     "@angular/platform-browser-dynamic": "~11.1.2",
     "@angular/router": "~11.1.2",
-    "@angular/cdk": "^11.0.3",
-    "@angular/flex-layout": "^11.0.0-beta.33",
-    "@angular/material": "^11.0.3",
     "rxjs": "~6.6.0",
     "tslib": "^2.0.0",
     "zone.js": "~0.10.2"
