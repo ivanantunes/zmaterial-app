@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { ZModalService } from 'zcomponents';
+import { ZModalService } from 'zmaterial';
 
 @Component({
   selector: 'app-root',

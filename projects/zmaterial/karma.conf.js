@@ -19,7 +19,7 @@ module.exports = function (config) {
       suppressAll: true // removes the duplicated traces
     },
     coverageReporter: {
-      dir: require('path').join(__dirname, '../../coverage/zcomponents'),
+      dir: require('path').join(__dirname, '../../coverage/zmaterial'),
       subdir: '.',
       reporters: [
         { type: 'html' },

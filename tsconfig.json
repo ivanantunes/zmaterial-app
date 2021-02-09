@@ -16,9 +16,9 @@
       "dom"
     ],
     "paths": {
-      "zcomponents": [
-        "dist/zcomponents/zcomponents",
-        "dist/zcomponents"
+      "zmaterial": [
+        "dist/zmaterial/zmaterial",
+        "dist/zmaterial"
       ]
     }
   }
