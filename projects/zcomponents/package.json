@@ -1,6 +1,6 @@
 {
-  "name": "zcomponents",
-  "version": "0.0.3",
+  "name": "zmaterial",
+  "version": "0.0.4",
   "peerDependencies": {
     "@angular/common": "~11.1.2",
     "@angular/core": "~11.1.2",
