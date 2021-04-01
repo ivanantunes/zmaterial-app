@@ -6,10 +6,14 @@ import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ZModalModule } from 'zmaterial';
 import { GlobalModule } from './global.module';
+import { UserComponent } from './register/user/user.component';
+import { CourseComponent } from './register/course/course.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    UserComponent,
+    CourseComponent
   ],
   imports: [
     BrowserModule,

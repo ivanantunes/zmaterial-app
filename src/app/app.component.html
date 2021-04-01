@@ -1,0 +1,9 @@
+<z-menu-material
+[titleProject]="'zMaterial'"
+[showLogout]="true"
+[profile]="currentProfile"
+(logout)="logout($event)"
+[menuItens]="currentMenus"
+>
+  <router-outlet></router-outlet>
+</z-menu-material>

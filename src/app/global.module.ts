@@ -22,6 +22,12 @@ import { MatDialogModule } from '@angular/material/dialog';
 // Toast
 import { ToastrModule } from 'ngx-toastr';
 
+// zMaterial
+import {
+    ZModalModule,
+    ZMenuModule
+} from 'zmaterial';
+
 @NgModule({
     declarations: [],
     imports: [
@@ -54,6 +60,10 @@ import { ToastrModule } from 'ngx-toastr';
 
         // Toast
         ToastrModule.forRoot(),
+
+        // zMaterial
+        ZModalModule,
+        ZMenuModule
     ],
     exports: [
         // Flex Layout
@@ -79,6 +89,10 @@ import { ToastrModule } from 'ngx-toastr';
 
         // Toast
         ToastrModule,
+
+        // zMaterial
+        ZModalModule,
+        ZMenuModule
     ],
     schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })

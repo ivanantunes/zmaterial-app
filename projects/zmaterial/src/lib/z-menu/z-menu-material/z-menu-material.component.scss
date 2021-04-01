@@ -1,0 +1,42 @@
+.header-spacer {
+    flex: 1 1 auto;
+}
+
+.sidenav-menus {
+    width: 250px;
+}
+
+.category-menu {
+    align-items: center;
+}
+
+.icon-right {
+    margin-right: 10px;
+}
+
+.profile-img {
+    border-radius: 50%;
+    margin: auto;
+    display: block;
+}
+
+.profile-info {
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    margin-top: 5px;
+}
+
+.header-logo {
+  margin-right: 20px;
+}
+
+.container-view {
+  min-height: 500px;
+}
+
+@media(max-width: 800px) {
+    .sidenav-menus {
+        width: 200px;
+    }
+}

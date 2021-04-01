@@ -1,0 +1,102 @@
+<div *ngIf="menuItens && menuItens.length !== 0 else noProviderMenu">
+  <mat-toolbar color="primary">
+
+    <mat-toolbar-row>
+
+      <button mat-icon-button *ngIf="(isHandset | async)" (click)="sidenav.toggle()">
+        <mat-icon>menu</mat-icon>
+      </button>
+
+      <!-- ? Logo Project -->
+      <img *ngIf="logoProject" class="header-logo" width="50px" height="50px" [src]="logoProject">
+
+      <!-- ? Title Project -->
+      <span>{{titleProject}}</span>
+
+      <span class="header-spacer"></span>
+
+      <!-- ? Button Language -->
+      <button mat-icon-button matTooltip="Linguagem" matTooltipPosition="below" [matMenuTriggerFor]="choiceLang">
+        <mat-icon>language</mat-icon>
+      </button>
+
+      <!-- ? Button Logout -->
+      <button mat-icon-button *ngIf="showLogout" (click)="logout.next(true)" matTooltip="Sair"
+        matTooltipPosition="below">
+        <mat-icon>logout</mat-icon>
+      </button>
+
+    </mat-toolbar-row>
+
+  </mat-toolbar>
+
+  <mat-sidenav-container autosize>
+
+    <mat-sidenav #sidenav [autoFocus]="false" [mode]="(isHandset | async) ? 'over' : 'side'"
+      [opened]="!(isHandset | async)" class="sidenav-menus">
+
+      <mat-card *ngIf="profile">
+
+        <mat-card-content>
+
+          <img class="profile-img" matTooltip="Foto de Perfil" matTooltipPosition="above"
+            [src]="profile.img ? profile.img : 'assets/no-profile.jpeg'" width="100px" height="100px">
+
+          <div *ngIf="profile.descriptions">
+            <div class="profile-info" *ngFor="let info of profile.descriptions">
+              <mat-icon class="icon-right">{{info.icon}}</mat-icon>
+              <span>{{info.text}}</span>
+            </div>
+          </div>
+
+        </mat-card-content>
+
+      </mat-card>
+
+
+      <mat-accordion multi>
+        <mat-expansion-panel class="mat-elevation-z0" *ngFor="let category of menuItens" [expanded]="true">
+
+          <mat-expansion-panel-header>
+
+            <mat-panel-title class="category-menu">
+              <mat-icon class="icon-right">{{category.icon}}</mat-icon>
+              <span>{{category.category}}</span>
+            </mat-panel-title>
+
+          </mat-expansion-panel-header>
+
+          <mat-nav-list>
+            <a mat-list-item *ngFor="let item of category.itens" [href]="item.link" [disabled]="item.disabled">
+              <mat-icon mat-list-icon *ngIf="item.icon">{{item.icon}}</mat-icon>
+              <div mat-line>{{item.label}}</div>
+            </a>
+          </mat-nav-list>
+
+        </mat-expansion-panel>
+      </mat-accordion>
+
+    </mat-sidenav>
+
+    <mat-sidenav-container>
+
+      <div class="container-view">
+        <ng-content></ng-content>
+      </div>
+
+    </mat-sidenav-container>
+
+  </mat-sidenav-container>
+
+</div>
+
+<mat-menu #choiceLang="matMenu">
+  <button mat-menu-item>Português</button>
+  <button mat-menu-item>English</button>
+</mat-menu>
+
+<ng-template #noProviderMenu>
+  <div>
+    Menu Não Definido.
+  </div>
+</ng-template>

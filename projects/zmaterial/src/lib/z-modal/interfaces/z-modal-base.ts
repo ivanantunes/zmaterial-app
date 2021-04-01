@@ -1,5 +1,3 @@
-import { ZModalType } from './z-modal-type';
-
 export interface ZModalBase {
   title: string;
   description: string;
