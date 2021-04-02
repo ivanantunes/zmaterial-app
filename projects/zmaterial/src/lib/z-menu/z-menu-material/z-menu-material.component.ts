@@ -1,7 +1,8 @@
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { Component, Input, OnInit, Output } from '@angular/core';
+import { ActivationStart, Router } from '@angular/router';
 import { Observable, Subject } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { filter, map } from 'rxjs/operators';
 import { ZMenuProfile, ZMenuItens } from '../interfaces';
 
 @Component({
@@ -32,11 +33,27 @@ export class ZMenuMaterialComponent implements OnInit {
     public isHandset: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset).pipe(
         map(result => result.matches)
     );
+    public hideSidebar = false;
 
     constructor(
-        private breakpointObserver: BreakpointObserver
+        private breakpointObserver: BreakpointObserver,
+        private router: Router,
     ) {}
 
-    ngOnInit(): void {}
+    ngOnInit(): void {
+
+      this.router.events.pipe(
+
+        filter((event) => event instanceof ActivationStart)
+
+      ).subscribe((event: ActivationStart) => {
+
+        if (event.snapshot.data.hideSideBar) {
+          this.hideSidebar = event.snapshot.data.hideSideBar;
+        }
+
+      });
+
+    }
 
 }

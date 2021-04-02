@@ -11,6 +11,9 @@ const routes: Routes = [
   {
     path: 'register/course',
     component: CourseComponent,
+    data: {
+      hideSideBar: true
+    }
   },
   {
     path: '',
