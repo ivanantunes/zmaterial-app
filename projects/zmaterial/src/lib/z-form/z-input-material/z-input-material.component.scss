@@ -5,3 +5,8 @@
 .error {
   font-size: 1.2em;
 }
+
+.is-loading ::ng-deep .mat-option-text {
+  display: flex;
+  justify-content: center;
+}

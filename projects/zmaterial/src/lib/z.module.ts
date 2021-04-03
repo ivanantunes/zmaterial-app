@@ -24,6 +24,8 @@ import { MatMenuModule } from '@angular/material/menu';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatInputModule } from '@angular/material/input';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatSelectModule } from '@angular/material/select';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
 
 @NgModule({
   declarations: [],
@@ -45,6 +47,8 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
     MatTooltipModule,
     MatInputModule,
     MatProgressSpinnerModule,
+    MatSelectModule,
+    MatAutocompleteModule,
 
     // Forms
     ReactiveFormsModule,
@@ -69,6 +73,8 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
     MatTooltipModule,
     MatInputModule,
     MatProgressSpinnerModule,
+    MatSelectModule,
+    MatAutocompleteModule,
 
     // Forms
     ReactiveFormsModule,

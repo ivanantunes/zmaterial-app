@@ -2,6 +2,7 @@
 
   <div [ngSwitch]="input.controlType">
 
+    <!-- ? Input | Text - Password - IP - CPF - CNPJ - Plate - CPF/CNPJ -->
     <div *ngSwitchCase="'inputText'">
 
       <mat-form-field class="full-width" appearance="outline" [hintLabel]="input.hint">
@@ -30,6 +31,62 @@
         <mat-hint *ngIf="asInputText.maxlength" align="end">
           {{currentControl.value.length || 0}} / {{asInputText.maxlength}}
         </mat-hint>
+
+      </mat-form-field>
+
+    </div>
+
+    <!-- ? Input | Select -->
+    <div *ngSwitchCase="'inputSelect'">
+
+      <mat-form-field class="full-width" appearance="outline" [hintLabel]="input.hint">
+
+        <mat-label>{{ input.label }}</mat-label>
+        <mat-icon matSuffix>{{input.icon ? input.icon : 'expand_more'}}</mat-icon>
+        <input matInput type="text" #autoInput
+        [required]="input.required"
+        (focus)="focusChange($event.target)"
+        [readonly]="!asInputSelect.typeWhileSerching && isLoading"
+        [placeholder]="input.label"
+        [formControl]="input.currentControl"
+        [id]="input.key"
+        [matAutocompleteDisabled]="!auto"
+        [matAutocomplete]="auto"
+        >
+
+        <mat-autocomplete #auto="matAutocomplete" [displayWith]="selectDisplay.bind(this)">
+
+          <mat-option [disabled]="true" *ngIf="isLoading" class="is-loading">
+            <mat-spinner diameter="50"></mat-spinner>
+          </mat-option>
+
+          <ng-container *ngIf="getDataObs | async as results">
+
+            <mat-option [disabled]="true" *ngIf="!isLoading && results.items.length === 0 && autoInput.value !== ''"
+              class="is-loading">
+              <span>Nenhum Resultado Econtrado</span>
+            </mat-option>
+
+
+            <ng-container *ngIf="!isLoading">
+              <mat-option [hidden]="isLoading" *ngFor="let result of results.items"
+                [value]="asInputSelect.valueProperty ? result[asInputSelect.valueProperty] : result">
+
+                <ng-container *ngTemplateOutlet="asInputSelect.customOptionTemplate ? asInputSelect.customOptionTemplate : defaultMatOptionTemplate; context:{item: result}"></ng-container>
+
+              </mat-option>
+              <mat-option [disabled]="true" *ngIf="results.totalItems > asInputSelect.maxItems">
+              <span>Resultado Não Completo. Refine sua Busca.</span>
+            </mat-option>
+            </ng-container>
+
+          </ng-container>
+
+        </mat-autocomplete>
+
+        <mat-error>
+          <ng-container *ngTemplateOutlet="errorsTemplate"></ng-container>
+        </mat-error>
 
       </mat-form-field>
 
@@ -78,6 +135,10 @@
           <strong>Valor não é um CNPJ válido.</strong>
         </div>
 
+        <div *ngSwitchCase="'invalidOption'">
+          <strong>Selecione uma das opções sugeridas.</strong>
+        </div>
+
         <div *ngSwitchCase="'remoteError'">
           <strong>{{ input.currentControl.errors[error] }}</strong>
         </div>
@@ -90,4 +151,11 @@
 
   </div>
 
+</ng-template>
+
+<ng-template #defaultMatOptionTemplate let-result='item'>
+  <img *ngIf="asInputSelect.displayImageSelect" aria-hidden
+    [src]="asInputSelect.displayImageSelect(result) || 'assets/no-profile.jpeg'" height="25">
+  <span>{{ asInputSelect.firstDisplaySelect(result) }}</span>
+  <small *ngIf="asInputSelect.secondaryDisplaySelect"> | {{ asInputSelect.secondaryDisplaySelect(result) }}</small>
 </ng-template>

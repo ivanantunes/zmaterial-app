@@ -5,11 +5,16 @@ import {
   zCpfCnpjPattern,
   zCpfPattern,
   zIpPattern,
+  zSelectValidator,
   zVehiclePlatePattern
 } from './validators';
 import { AbstractControl, AsyncValidatorFn, FormControl, FormGroup, ValidatorFn, Validators } from '@angular/forms';
 import { Injectable } from '@angular/core';
-import { ZFormInputBase, ZFormInputText } from './form-inputs';
+import {
+  ZFormInputBase,
+  ZFormInputText,
+  ZFormInputSelect
+} from './form-inputs';
 
 @Injectable({
   providedIn: 'root'
@@ -65,6 +70,10 @@ export class ZFormService {
           validators.push(Validators.pattern(zCpfCnpjPattern));
           break;
       }
+    }
+
+    if (input.controlType === 'inputSelect') {
+      asyncValidators.push(zSelectValidator((input as ZFormInputSelect<any, any>)));
     }
 
     const control = new FormControl({

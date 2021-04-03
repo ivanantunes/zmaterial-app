@@ -1,4 +1,7 @@
-import { AbstractControl, ValidationErrors } from '@angular/forms';
+import { Observable, of } from 'rxjs';
+import { ZFormInputSelect } from './../form-inputs/z-form-input-select';
+import { AbstractControl, AsyncValidatorFn, ValidationErrors } from '@angular/forms';
+import { map } from 'rxjs/operators';
 
 export function zCfpValidator(control: AbstractControl): ValidationErrors | null {
   let cpf: string = control.value;
@@ -122,4 +125,28 @@ export function zCnpjValidar(control: AbstractControl): ValidationErrors | null 
   }
 
   return null;
+}
+
+export function zSelectValidator(input: ZFormInputSelect<any, any>): AsyncValidatorFn {
+
+  return (control: AbstractControl): Observable<ValidationErrors | null> => {
+
+    if (!control.value) {
+      return of(null);
+    }
+
+    if (input.valueProperty && input.getSingleItem) {
+      return input.getSingleItem(control.value).pipe(
+        map((res) => res ? null : { invalidOption: { value: control.value } } )
+      );
+    }
+
+    if (typeof control.value !== 'object') {
+      return of({ invalidOption: { value: control.value } });
+    }
+
+    return of(null);
+
+  };
+
 }
