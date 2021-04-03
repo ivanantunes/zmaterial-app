@@ -1,4 +1,4 @@
-export interface ZMenuItens {
+export interface ZMenuItems {
   category: string;
   icon: string;
   itens: {

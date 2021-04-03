@@ -20,7 +20,7 @@ import { ZModalComponent } from './z-modal.component';
  * Service That Has Modals Call Functions.
  *
  * @author Ivan Antunes <ivanantnes75@gmail.com>
- * @copyright z-components
+ * @copyright zmaterial
  */
 export class ZModalService {
 
@@ -30,7 +30,7 @@ export class ZModalService {
    * Execute the Success Modal Template.
    *
    * @author Ivan Antunes <ivanantnes75@gmail.com>
-   * @copyright z-components
+   * @copyright zmaterial
    */
   public zModalTSuccess(config: ZModalBase): void {
     this.dialog.open(ZModalComponent, {
@@ -50,7 +50,7 @@ export class ZModalService {
    * Execute the Success Log Modal Template.
    *
    * @author Ivan Antunes <ivanantnes75@gmail.com>
-   * @copyright z-components
+   * @copyright zmaterial
    */
   public zModalTSuccessLog(config: ZModalLog): void {
     this.dialog.open(ZModalComponent, {
@@ -72,7 +72,7 @@ export class ZModalService {
    * Execute the Success Confirm Modal Template.
    *
    * @author Ivan Antunes <ivanantnes75@gmail.com>
-   * @copyright z-components
+   * @copyright zmaterial
    */
   public zModalTSuccessConfirm(config: ZModalConfirm): Observable<boolean> {
     const resp = this.dialog.open(ZModalComponent, {
@@ -95,7 +95,7 @@ export class ZModalService {
    * Execute the Warning Modal Template.
    *
    * @author Ivan Antunes <ivanantnes75@gmail.com>
-   * @copyright z-components
+   * @copyright zmaterial
    */
   public zModalTWarning(config: ZModalBase): void {
     this.dialog.open(ZModalComponent, {
@@ -115,7 +115,7 @@ export class ZModalService {
    * Execute the Warning Log Modal Template.
    *
    * @author Ivan Antunes <ivanantnes75@gmail.com>
-   * @copyright z-components
+   * @copyright zmaterial
    */
   public zModalTWarningLog(config: ZModalLog): void {
     this.dialog.open(ZModalComponent, {
@@ -137,7 +137,7 @@ export class ZModalService {
    * Execute the Warning Confirm Modal Template.
    *
    * @author Ivan Antunes <ivanantnes75@gmail.com>
-   * @copyright z-components
+   * @copyright zmaterial
    */
   public zModalTWarningConfirm(config: ZModalConfirm): Observable<boolean> {
     const resp = this.dialog.open(ZModalComponent, {
@@ -160,7 +160,7 @@ export class ZModalService {
    * Execute the Error Modal Template.
    *
    * @author Ivan Antunes <ivanantnes75@gmail.com>
-   * @copyright z-components
+   * @copyright zmaterial
    */
   public zModalTError(config: ZModalBase): void {
     this.dialog.open(ZModalComponent, {
@@ -180,7 +180,7 @@ export class ZModalService {
    * Execute the Error Log Modal Template.
    *
    * @author Ivan Antunes <ivanantnes75@gmail.com>
-   * @copyright z-components
+   * @copyright zmaterial
    */
   public zModalTErrorLog(config: ZModalLog): void {
     this.dialog.open(ZModalComponent, {
@@ -202,7 +202,7 @@ export class ZModalService {
    * Execute the Error Confirm Modal Template.
    *
    * @author Ivan Antunes <ivanantnes75@gmail.com>
-   * @copyright z-components
+   * @copyright zmaterial
    */
   public zModalTErrorConfirm(config: ZModalConfirm): Observable<boolean> {
     const resp = this.dialog.open(ZModalComponent, {
@@ -225,7 +225,7 @@ export class ZModalService {
    * Execute the Manual Modal.
    *
    * @author Ivan Antunes <ivanantnes75@gmail.com>
-   * @copyright z-components
+   * @copyright zmaterial
    */
   public zModalManual(config: ZModalManual): void {
     this.dialog.open(ZModalComponent, {
@@ -247,7 +247,7 @@ export class ZModalService {
    * Execute the Manual Log Modal.
    *
    * @author Ivan Antunes <ivanantnes75@gmail.com>
-   * @copyright z-components
+   * @copyright zmaterial
    */
   public zModalManualLog(config: ZModalManualLog): void {
     this.dialog.open(ZModalComponent, {
@@ -271,7 +271,7 @@ export class ZModalService {
    * Execute the Manual Confirm Modal.
    *
    * @author Ivan Antunes <ivanantnes75@gmail.com>
-   * @copyright z-components
+   * @copyright zmaterial
    */
   public zModalManualConfirm(config: ZModalManualConfirm): Observable<boolean> {
     const resp = this.dialog.open(ZModalComponent, {

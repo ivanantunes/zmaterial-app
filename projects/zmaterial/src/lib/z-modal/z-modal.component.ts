@@ -19,16 +19,16 @@ export class ZModalComponent implements OnInit {
 
   ngOnInit(): void {}
 
-  close(): void {
+  public close(): void {
     this.dialogRef.close();
   }
 
-  closeConfirm(): void {
+  public closeConfirm(): void {
     this.isConfirmed.emit(false);
     this.close();
   }
 
-  acceptConfirm(): void {
+  public acceptConfirm(): void {
     this.isConfirmed.emit(true);
     this.close();
   }

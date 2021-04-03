@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { ZMenuProfile, ZModalService, ZMenuItens } from 'zmaterial';
+import { ZMenuProfile, ZModalService, ZMenuItems } from 'zmaterial';
 
 @Component({
   selector: 'app-root',
@@ -14,7 +14,7 @@ export class AppComponent {
     ]
   };
 
-  public currentMenus: ZMenuItens[] = [
+  public currentMenus: ZMenuItems[] = [
     {
       category: 'Cadastro',
       icon: 'add',

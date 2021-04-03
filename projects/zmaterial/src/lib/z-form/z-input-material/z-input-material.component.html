@@ -1,0 +1,93 @@
+<div [formGroup]="form">
+
+  <div [ngSwitch]="input.controlType">
+
+    <div *ngSwitchCase="'inputText'">
+
+      <mat-form-field class="full-width" appearance="outline" [hintLabel]="input.hint">
+
+        <mat-label>{{input.label}}</mat-label>
+
+        <input matInput
+        [placeholder]="input.label"
+        [name]="input.key"
+        [formControl]="input.currentControl"
+        [readonly]="true"
+        [maxlength]="asInputText.maxlength"
+        [id]="input.key"
+        [type]="asInputText.type"
+        [mask]="asInputText.mask"
+        [readonly]="input.readonly"
+        [required]="input.required"
+        [dropSpecialCharacters]="false">
+
+        <mat-icon *ngIf="input.icon" matSuffix>{{input.icon}}</mat-icon>
+
+        <mat-error class="error">
+          <ng-container *ngTemplateOutlet="errorsTemplate"></ng-container>
+        </mat-error>
+
+        <mat-hint *ngIf="asInputText.maxlength" align="end">
+          {{currentControl.value.length || 0}} / {{asInputText.maxlength}}
+        </mat-hint>
+
+      </mat-form-field>
+
+    </div>
+
+
+
+  </div>
+
+
+</div>
+
+<ng-template #errorsTemplate>
+
+  <div *ngIf="input.currentControl.errors && input.currentControl.invalid && (input.currentControl.dirty || input.currentControl.touched)">
+
+    <div *ngFor="let error of getErrors(input.currentControl)">
+
+      <div [ngSwitch]="error">
+
+        <div *ngSwitchCase="'required'">
+          {{input.label}} <strong>é obrigatório.</strong>
+        </div>
+
+        <div *ngSwitchCase="'email'">
+          <strong>Não é um email válido.</strong>
+        </div>
+
+        <div *ngSwitchCase="'pattern'">
+          <strong>Padrão inválido para</strong> {{input.label}}.
+        </div>
+
+        <div *ngSwitchCase="'minlength'">
+          <strong>Valor muito curto para</strong> {{input.label}}.
+        </div>
+
+        <div *ngSwitchCase="'maxlength'">
+          <strong>Valor muito longo para</strong> {{input.label}}.
+        </div>
+
+        <div *ngSwitchCase="'invalidCPF'">
+          <strong>Valor não é um CPF válido.</strong>
+        </div>
+
+        <div *ngSwitchCase="'invalidCNPJ'">
+          <strong>Valor não é um CNPJ válido.</strong>
+        </div>
+
+        <div *ngSwitchCase="'remoteError'">
+          <strong>{{ input.currentControl.errors[error] }}</strong>
+        </div>
+
+        <div *ngSwitchDefault><strong>{{error}}</strong></div>
+      </div>
+
+    </div>
+
+
+  </div>
+
+</ng-template>

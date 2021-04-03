@@ -1,4 +1,4 @@
-<div *ngIf="menuItens && menuItens.length !== 0 else noProviderMenu">
+<div *ngIf="menuItems && menuItems.length !== 0 else noProviderMenu">
   <div *ngIf="!hideSidebar else noMenu">
     <mat-toolbar color="primary">
 
@@ -56,7 +56,7 @@
 
 
         <mat-accordion multi>
-          <mat-expansion-panel class="mat-elevation-z0" *ngFor="let category of menuItens" [expanded]="true">
+          <mat-expansion-panel class="mat-elevation-z0" *ngFor="let category of menuItems" [expanded]="true">
 
             <mat-expansion-panel-header>
 

@@ -3,7 +3,7 @@ import { Component, Input, OnInit, Output } from '@angular/core';
 import { ActivationStart, Router } from '@angular/router';
 import { Observable, Subject } from 'rxjs';
 import { filter, map } from 'rxjs/operators';
-import { ZMenuProfile, ZMenuItens } from '../interfaces';
+import { ZMenuProfile, ZMenuItems } from '../interfaces';
 
 @Component({
     selector: 'z-menu-material',
@@ -15,24 +15,52 @@ export class ZMenuMaterialComponent implements OnInit {
 
     // ? Input - Screen Infos
 
+    /**
+     * Define title project
+     */
     @Input() titleProject: string;
+
+    /**
+     * Define logo project
+     */
     @Input() logoProject: string;
+
+    /**
+     * Define profile items
+     */
     @Input() profile: ZMenuProfile;
-    @Input() menuItens: ZMenuItens[];
+
+    /**
+     * Define menu items
+     */
+    @Input() menuItems: ZMenuItems[];
 
     // ? Input - Show Itens
 
+    /**
+     * If show button logout or not.
+     */
     @Input() showLogout: boolean;
 
     // ? Output - Event Data
+
+    /**
+     * Event click logout.
+     */
     @Output() logout = new Subject<boolean>();
 
     // ? Global
 
-    public loading = true;
+    /**
+     * Defines whether it is a mobile device
+     */
     public isHandset: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset).pipe(
         map(result => result.matches)
     );
+
+    /**
+     * Hide sidebar of screen
+     */
     public hideSidebar = false;
 
     constructor(

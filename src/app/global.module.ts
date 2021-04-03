@@ -25,7 +25,8 @@ import { ToastrModule } from 'ngx-toastr';
 // zMaterial
 import {
     ZModalModule,
-    ZMenuModule
+    ZMenuModule,
+    ZFormModule
 } from 'zmaterial';
 
 @NgModule({
@@ -92,7 +93,8 @@ import {
 
         // zMaterial
         ZModalModule,
-        ZMenuModule
+        ZMenuModule,
+        ZFormModule
     ],
     schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })

@@ -4,6 +4,12 @@ import { NgModule } from '@angular/core';
 // Base
 import { CommonModule } from '@angular/common';
 
+// Layout
+import { FlexLayoutModule } from '@angular/flex-layout';
+
+// Forms
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
+
 // Material
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
@@ -16,6 +22,8 @@ import { MatExpansionModule } from '@angular/material/expansion';
 import { MatListModule } from '@angular/material/list';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatTooltipModule } from '@angular/material/tooltip';
+import { MatInputModule } from '@angular/material/input';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 @NgModule({
   declarations: [],
@@ -34,7 +42,17 @@ import { MatTooltipModule } from '@angular/material/tooltip';
     MatExpansionModule,
     MatListModule,
     MatMenuModule,
-    MatTooltipModule
+    MatTooltipModule,
+    MatInputModule,
+    MatProgressSpinnerModule,
+
+    // Forms
+    ReactiveFormsModule,
+    FormsModule,
+
+    // Layout
+    FlexLayoutModule,
+
   ],
   exports: [
     // Material
@@ -48,7 +66,16 @@ import { MatTooltipModule } from '@angular/material/tooltip';
     MatExpansionModule,
     MatListModule,
     MatMenuModule,
-    MatTooltipModule
+    MatTooltipModule,
+    MatInputModule,
+    MatProgressSpinnerModule,
+
+    // Forms
+    ReactiveFormsModule,
+    FormsModule,
+
+    // Layout
+    FlexLayoutModule,
   ]
 })
 export class ZModule { }

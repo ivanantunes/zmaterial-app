@@ -1,0 +1,63 @@
+<div class="loading" *ngIf="showLoading || !formProvider">
+  <mat-spinner *ngIf="showLoading"></mat-spinner>
+
+  <div *ngIf="!formProvider">
+    Nenhum Form Provider Definido.
+  </div>
+
+</div>
+
+<mat-spinner *ngIf="!form else fullFormBody"></mat-spinner>
+
+<ng-template #fullFormBody>
+
+  <form class="container-form" (ngSubmit)="sendValue()" autocomplete="off" [formGroup]="form">
+
+    <mat-card>
+      <ng-container *ngTemplateOutlet="formBody"></ng-container>
+    </mat-card>
+
+  </form>
+
+</ng-template>
+
+<ng-template #formBody>
+
+  <mat-card-header *ngIf="!hideHeaderForm">
+
+    <mat-card-title>{{ title }}</mat-card-title>
+    <mat-card-subtitle *ngIf="subtitle">{{ subtitle }}</mat-card-subtitle>
+
+  </mat-card-header>
+
+  <mat-card-content>
+
+    <div fxLayout="row wrap" fxLayoutGap="20px" fxLayoutGap.lt-sm="5px" fxLayoutAlign="space-around center"
+      fxLayoutAlign="flex-start">
+
+      <div *ngFor="let input of formInputs" [fxFlexOrder]="input.order"
+        [fxFlex]="'0 1 calc('+ input.layout.cols + '% - 20px)'"
+        [fxFlex.lt-sm]="'calc(' + (input.layout.colSmall || 100) + '% - 5px)'">
+
+        <z-input-material [input]="input" [form]="form"></z-input-material>
+
+      </div>
+
+    </div>
+
+  </mat-card-content>
+
+  <mat-card-actions>
+
+    <button mat-raised-button color="primary" type="submit" [disabled]="!form.valid || showLoading">
+      {{ submitText }}
+    </button>
+
+    <button *ngIf="showClearButton" type="button" mat-raised-button color="accent" (click)="reset($event)"
+    [disabled]="showLoading">
+      Limpar Campos
+    </button>
+
+  </mat-card-actions>
+
+</ng-template>

@@ -1,21 +1,7 @@
-<mat-card style="width: 200px; display: block; margin: 5% auto;">
-
-  <mat-card-header>
-
-    <mat-card-title>Olá Usuário</mat-card-title>
-
-  </mat-card-header>
-
-  <mat-card-content>
-
-    <p> Aqui Vai o conteudo!</p>
-
-  </mat-card-content>
-
-  <mat-card-actions>
-
-    <button mat-raised-button>Enviar</button>
-
-  </mat-card-actions>
-
-</mat-card>
+<z-form-material
+[title]="'Exemplo de Formulário'"
+[formProvider]="this"
+[showClearButton]="true"
+[submitText]="'Salvar Dados'"
+(submitValue)="saveData($event)"
+></z-form-material>
