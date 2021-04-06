@@ -30,6 +30,8 @@
     "@angular/router": "~11.1.2",
     "bootstrap": "^4.6.0",
     "font-awesome": "^4.7.0",
+    "i18next": "^20.1.0",
+    "i18next-browser-languagedetector": "^6.1.0",
     "jquery": "^3.6.0",
     "material-icons": "^0.5.4",
     "ngx-mask": "^11.1.5",

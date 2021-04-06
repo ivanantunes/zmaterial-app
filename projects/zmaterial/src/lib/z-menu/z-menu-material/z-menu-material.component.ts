@@ -1,3 +1,4 @@
+import { ZTranslateService } from './../../services/z-translate.service';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { Component, Input, OnInit, Output } from '@angular/core';
 import { ActivationStart, Router } from '@angular/router';
@@ -66,6 +67,7 @@ export class ZMenuMaterialComponent implements OnInit {
     constructor(
         private breakpointObserver: BreakpointObserver,
         private router: Router,
+        private tService: ZTranslateService
     ) {}
 
     ngOnInit(): void {
@@ -82,6 +84,14 @@ export class ZMenuMaterialComponent implements OnInit {
 
       });
 
+    }
+
+    public changeLang(lng: string): void {
+      this.tService.setCurrentLanguage(lng).subscribe(() => {
+        window.location.reload();
+      }, (err) => {
+        console.log('Falha ao Alterar Idioma: ', err);
+      });
     }
 
 }

@@ -91,8 +91,8 @@
 </div>
 
 <mat-menu #choiceLang="matMenu">
-  <button mat-menu-item>Português</button>
-  <button mat-menu-item>English</button>
+  <button mat-menu-item (click)="changeLang('pt')">Português</button>
+  <button mat-menu-item (click)="changeLang('en')">English</button>
 </mat-menu>
 
 <ng-template #noMenu>

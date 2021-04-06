@@ -1,5 +1,10 @@
+// Configs
+export interface ZModuleConfig {
+  languageData: ZLanguageData;
+}
+
 // NgModule
-import { NgModule } from '@angular/core';
+import { ModuleWithProviders, NgModule } from '@angular/core';
 
 // Base
 import { CommonModule } from '@angular/common';
@@ -9,6 +14,9 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 
 // Forms
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
+
+// Services
+import { ZLanguageData, ZTranslateService } from './services';
 
 // Material
 import { MatButtonModule } from '@angular/material/button';
@@ -26,9 +34,12 @@ import { MatInputModule } from '@angular/material/input';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatSelectModule } from '@angular/material/select';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
+import { ZTranslationPipe } from './pipes/z-translation.pipe';
 
 @NgModule({
-  declarations: [],
+  declarations: [
+    ZTranslationPipe
+  ],
   imports: [
     // Base
     CommonModule,
@@ -82,6 +93,22 @@ import { MatAutocompleteModule } from '@angular/material/autocomplete';
 
     // Layout
     FlexLayoutModule,
+
+    // Pipes
+    ZTranslationPipe
+  ],
+  providers: [
+    ZTranslateService
   ]
 })
-export class ZModule { }
+export class ZModule {
+  static forRoot(config: ZModuleConfig): ModuleWithProviders<ZModule> {
+    return {
+      ngModule: ZModule,
+      providers: [
+        ZTranslateService,
+        {provide: 'langConfig', useValue: config.languageData}
+      ]
+    };
+  }
+}

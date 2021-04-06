@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { ZMenuProfile, ZModalService, ZMenuItems } from 'zmaterial';
+import { ZMenuProfile, ZModalService, ZMenuItems, ZTranslateService } from 'zmaterial';
 
 @Component({
   selector: 'app-root',
@@ -26,7 +26,6 @@ export class AppComponent {
   ];
 
   constructor(private zModal: ZModalService) {
-
 
   }
 

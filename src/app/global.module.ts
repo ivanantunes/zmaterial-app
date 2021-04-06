@@ -1,3 +1,6 @@
+// Locale
+import { translate } from './locale/translate';
+
 // Angular
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { CommonModule } from '@angular/common';
@@ -24,6 +27,7 @@ import { ToastrModule } from 'ngx-toastr';
 
 // zMaterial
 import {
+    ZModule,
     ZModalModule,
     ZMenuModule,
     ZFormModule
@@ -63,8 +67,12 @@ import {
         ToastrModule.forRoot(),
 
         // zMaterial
+        ZModule.forRoot({
+          languageData: translate
+        }),
         ZModalModule,
-        ZMenuModule
+        ZMenuModule,
+        ZFormModule,
     ],
     exports: [
         // Flex Layout
@@ -92,6 +100,7 @@ import {
         ToastrModule,
 
         // zMaterial
+        ZModule,
         ZModalModule,
         ZMenuModule,
         ZFormModule

@@ -1,3 +1,9 @@
+// ! Pipes
+export * from './lib/pipes/index';
+// ! Services
+export * from './lib/services/index';
+// ! Module
+export * from './lib/z.module';
 // ! z-modal
 export * from './lib/z-modal/index';
 // ! z-menu
