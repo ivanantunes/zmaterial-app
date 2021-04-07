@@ -10,4 +10,6 @@ export * from './lib/z-modal/index';
 export * from './lib/z-menu/index';
 // ! z-form
 export * from './lib/z-form/index';
+// ! z-report
+export * from './lib/z-report/index';
 

@@ -1,0 +1,82 @@
+<mat-card class="container-main" *ngIf="getReportConfig else error">
+
+  <!-- ? Container Repeort Logo -->
+  <div *ngIf="getReportConfig.img">
+    <img [src]="getReportConfig.img" width="150px" height="150px" class="report-logo">
+  </div>
+
+  <!-- ? Container Report Header -->
+  <div>
+
+    <h1 class="report-title text-center">{{getReportConfig.title}} - {{getReportConfig.reportTitle}}</h1>
+
+    <p class="report-subtile">
+      <strong>Data / Hora: </strong>
+      {{dateGenerateReport}}
+    </p>
+
+    <p class="report-subtile">
+      <strong>Total de Registros: </strong>
+      {{dataSource.length}}
+    </p>
+
+    <!-- ? Container Report Actions -->
+
+    <div class="report-actions" *ngIf="getReportConfig.actions">
+
+      <button mat-raised-button color="accent" *ngIf="getReportConfig.actions.csv" class="report-actions-button">
+        Exportar em .CSV <mat-icon>text_snippet</mat-icon>
+      </button>
+      <button mat-raised-button color="accent" *ngIf="getReportConfig.actions.pdf" class="report-actions-button">
+        Exportar em .PDF <mat-icon>description</mat-icon>
+      </button>
+      <button mat-raised-button color="accent" *ngIf="getReportConfig.actions.xlsx" class="report-actions-button">
+        Exportar em .XLSX <mat-icon>table_chart</mat-icon>
+      </button>
+
+    </div>
+
+    <div class="clear-both"></div>
+
+  </div>
+
+  <!-- ? Container Report Filters -->
+  <div *ngIf="getReportConfig.filters.length > 0">
+
+    <h2 class="margin-top" id="filters-report-title">Filtros do Relatório</h2>
+
+    <div *ngFor="let filter of getReportConfig.filters">
+      <p class="report-filter-text"><strong>{{filter.title}}:</strong> {{filter.value}}</p>
+    </div>
+
+    <div class="clear-both"></div>
+
+  </div>
+
+  <!-- ? Container Report -->
+
+  <div class="full-width">
+
+    <table mat-table class="report-table" [dataSource]="dataSource">
+
+      <ng-container *ngFor="let column of getReportDefinition" [matColumnDef]="column.key">
+
+        <!-- Header Table -->
+        <th class="report-title"  *matHeaderCellDef>{{column.header}}</th>
+
+        <!-- Rows Table -->
+        <td class="report-rows-text" mat-cell *matCellDef="let row">{{ column.cell(row) }}</td>
+
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="getReportColumns; sticky: true"></tr>
+      <tr mat-row *matRowDef="let row; columns: getReportColumns;" class="report-rows"></tr>
+    </table>
+
+  </div>
+
+</mat-card>
+
+<ng-template #error>
+  <p>Configuração do Relatório Não Definida!</p>
+</ng-template>

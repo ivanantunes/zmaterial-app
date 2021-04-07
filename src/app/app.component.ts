@@ -22,6 +22,13 @@ export class AppComponent {
         { label: 'Usuário', link: 'register/user' },
         { label: 'Curso', link: 'register/course' }
       ]
+    },
+    {
+      category: 'Relatório',
+      icon: 'table_chart',
+      itens: [
+        { label: 'Logs', link: 'report/logs' }
+      ]
     }
   ];
 

@@ -30,7 +30,8 @@ import {
     ZModule,
     ZModalModule,
     ZMenuModule,
-    ZFormModule
+    ZFormModule,
+    ZReportModule
 } from 'zmaterial';
 
 @NgModule({
@@ -73,6 +74,7 @@ import {
         ZModalModule,
         ZMenuModule,
         ZFormModule,
+        ZReportModule
     ],
     exports: [
         // Flex Layout
@@ -103,7 +105,8 @@ import {
         ZModule,
         ZModalModule,
         ZMenuModule,
-        ZFormModule
+        ZFormModule,
+        ZReportModule
     ],
     schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })

@@ -8,12 +8,14 @@ import { ZModalModule } from 'zmaterial';
 import { GlobalModule } from './global.module';
 import { UserComponent } from './register/user/user.component';
 import { CourseComponent } from './register/course/course.component';
+import { LogsComponent } from './report/logs/logs.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     UserComponent,
-    CourseComponent
+    CourseComponent,
+    LogsComponent
   ],
   imports: [
     BrowserModule,

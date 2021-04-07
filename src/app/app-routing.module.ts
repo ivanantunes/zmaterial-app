@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { CourseComponent } from './register/course/course.component';
 import { UserComponent } from './register/user/user.component';
+import { LogsComponent } from './report/logs/logs.component';
 
 const routes: Routes = [
   {
@@ -14,6 +15,10 @@ const routes: Routes = [
     data: {
       hideSideBar: true
     }
+  },
+  {
+    path: 'report/logs',
+    component: LogsComponent,
   },
   {
     path: '',

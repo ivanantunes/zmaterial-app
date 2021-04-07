@@ -18,6 +18,9 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 // Services
 import { ZLanguageData, ZTranslateService } from './services';
 
+// Pipe
+import { ZTranslationPipe } from './pipes/z-translation.pipe';
+
 // Material
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
@@ -34,11 +37,12 @@ import { MatInputModule } from '@angular/material/input';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatSelectModule } from '@angular/material/select';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
-import { ZTranslationPipe } from './pipes/z-translation.pipe';
+import { MatGridListModule } from '@angular/material/grid-list';
+import { MatTableModule } from '@angular/material/table';
 
 @NgModule({
   declarations: [
-    ZTranslationPipe
+    ZTranslationPipe,
   ],
   imports: [
     // Base
@@ -60,6 +64,8 @@ import { ZTranslationPipe } from './pipes/z-translation.pipe';
     MatProgressSpinnerModule,
     MatSelectModule,
     MatAutocompleteModule,
+    MatGridListModule,
+    MatTableModule,
 
     // Forms
     ReactiveFormsModule,
@@ -86,6 +92,8 @@ import { ZTranslationPipe } from './pipes/z-translation.pipe';
     MatProgressSpinnerModule,
     MatSelectModule,
     MatAutocompleteModule,
+    MatGridListModule,
+    MatTableModule,
 
     // Forms
     ReactiveFormsModule,
