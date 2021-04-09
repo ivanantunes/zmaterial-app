@@ -1,10 +1,11 @@
 import { ZReportConfig } from './../interfaces/z-report-config';
 import { Component, Input, OnInit } from '@angular/core';
 import { ZReportProvider } from '../providers';
-import { catchError, map } from 'rxjs/operators';
+import { catchError } from 'rxjs/operators';
 import { of } from 'rxjs';
 import { ZModalService } from '../../z-modal';
 import { ZReportDefinition } from '../interfaces';
+import { zPdfGenerator } from '../functions';
 
 @Component({
   selector: 'z-report-material',
@@ -58,6 +59,10 @@ export class ZReportMaterialComponent implements OnInit {
       this.dataSource = data;
     });
 
+  }
+
+  public exportPDF(): void {
+    zPdfGenerator(this.getReportConfig, this.getReportDefinition, this.dataSource);
   }
 
 }

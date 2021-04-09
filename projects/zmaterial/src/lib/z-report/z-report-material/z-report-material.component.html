@@ -1,8 +1,8 @@
 <mat-card class="container-main" *ngIf="getReportConfig else error">
 
   <!-- ? Container Repeort Logo -->
-  <div *ngIf="getReportConfig.img">
-    <img [src]="getReportConfig.img" width="150px" height="150px" class="report-logo">
+  <div *ngIf="getReportConfig.image">
+    <img [src]="getReportConfig.image.image" width="150px" height="150px" class="report-logo">
   </div>
 
   <!-- ? Container Report Header -->
@@ -27,7 +27,7 @@
       <button mat-raised-button color="accent" *ngIf="getReportConfig.actions.csv" class="report-actions-button">
         Exportar em .CSV <mat-icon>text_snippet</mat-icon>
       </button>
-      <button mat-raised-button color="accent" *ngIf="getReportConfig.actions.pdf" class="report-actions-button">
+      <button mat-raised-button color="accent" (click)="exportPDF()"  *ngIf="getReportConfig.actions.pdf" class="report-actions-button">
         Exportar em .PDF <mat-icon>description</mat-icon>
       </button>
       <button mat-raised-button color="accent" *ngIf="getReportConfig.actions.xlsx" class="report-actions-button">
