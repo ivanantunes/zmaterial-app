@@ -10,7 +10,7 @@ export class AppComponent {
 
   public currentProfile: ZMenuProfile = {
     descriptions: [
-      {icon: 'email', text: 'ivanantnes75@gmail.com'},
+      {icon: 'email', text: 'example@gmail.com'},
     ]
   };
 

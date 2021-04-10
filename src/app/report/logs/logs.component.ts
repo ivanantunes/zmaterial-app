@@ -73,16 +73,14 @@ export class LogsComponent extends ZReportProvider<PeriodicElement> implements O
 
   public getReportConfig(): ZReportConfig {
     return {
-      title: 'IFSP - Boituva',
+      title: 'Title Company',
       image: {
         image: 'assets/no-profile.jpeg',
         type: 'JPEG'
       },
-      reportTitle: 'Relatório de Ultimo Acesso',
+      reportTitle: 'Title Report Exmaple',
       filters: [
-        {title: 'Usuário', value: 'Ivan Antunes'},
-        {title: 'Curso', value: 'Analise e Desenvolvimento de Sistemas'},
-        {title: 'Disciplina', value: 'Programação para Web'},
+        {title: 'My Filter', value: 'Filter Value'},
       ],
       actions: {
         pdf: true,
