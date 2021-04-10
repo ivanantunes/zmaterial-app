@@ -67,7 +67,6 @@ Below is the list of components that are available to use
 1. [zMenu](#zMenu)
 2. [zForms](#zForms)
 3. [zReport](#zReport)
-4. [zModal](#zModal)
 
 ### zMenu
 
