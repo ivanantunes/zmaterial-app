@@ -2,6 +2,7 @@ import { Inject, Injectable } from '@angular/core';
 import i18next, { TFunction } from 'i18next';
 import LanguageDetector from 'i18next-browser-languagedetector';
 import { from, Observable, Subject } from 'rxjs';
+import { zFormTranslate, zGenericTranslate, zMenuTranslate, zReportTranslate } from '../locale';
 
 export interface ZLanguageData {
   pt: any;
@@ -21,13 +22,21 @@ export class ZTranslateService {
 
     const pt = {
       translation: {
-        ...this.configs.pt
+        ...this.configs.pt,
+        ...zGenericTranslate.pt,
+        ...zFormTranslate.pt,
+        ...zMenuTranslate.pt,
+        ...zReportTranslate.pt
       }
     };
 
     const en = {
       translation: {
-        ...this.configs.en
+        ...this.configs.en,
+        ...zGenericTranslate.en,
+        ...zFormTranslate.en,
+        ...zMenuTranslate.en,
+        ...zReportTranslate.en
       }
     };
 

@@ -1,3 +1,4 @@
+import { ZTranslateService } from '../../services';
 import * as jsPDF from 'jspdf';
 import 'jspdf-autotable';
 import { ZReportConfig, ZReportDefinition } from '../interfaces';
@@ -104,11 +105,11 @@ function pdfTableStyle(config: ZReportConfig): any {
   };
 }
 
-function pdfCreatedAndTotalRows(date: Date, totalItems: number): any {
+function pdfCreatedAndTotalRows(date: Date, totalItems: number, tService: ZTranslateService): any {
   return [
     [
       {
-        content: 'Criado em',
+        content: tService.t('lbl_data_time_create'),
         colSpan: 1,
         styles: {
           fontStyle: 'bold',
@@ -119,7 +120,7 @@ function pdfCreatedAndTotalRows(date: Date, totalItems: number): any {
         }
       },
       {
-        content: 'Total de Registros',
+        content: tService.t('lbl_total_records'),
         colSpan: 1,
         styles: {
           fontStyle: 'bold',
@@ -157,7 +158,9 @@ function pdfCreatedAndTotalRows(date: Date, totalItems: number): any {
   ];
 }
 
-export function zPdfGenerator(config: ZReportConfig, definition: ZReportDefinition<any>[], data: any[]): void {
+export function zPdfGenerator(
+  config: ZReportConfig, definition: ZReportDefinition<any>[], data: any[], tService: ZTranslateService
+): void {
 
   // TODO: Talvez precise colocar os filtros no pdf
 
@@ -204,7 +207,7 @@ export function zPdfGenerator(config: ZReportConfig, definition: ZReportDefiniti
       halign: 'left',
       valign: 'middle'
     },
-    body: pdfSectionGenerator('Análises')
+    body: pdfSectionGenerator(tService.t('lbl_analysis'))
   });
 
   // ? PDF Analysis
@@ -224,7 +227,7 @@ export function zPdfGenerator(config: ZReportConfig, definition: ZReportDefiniti
         left: 0
       }
     },
-    body: pdfCreatedAndTotalRows(currentDate, data.length)
+    body: pdfCreatedAndTotalRows(currentDate, data.length, tService)
   });
 
   // ? PDF Section Results
@@ -234,7 +237,7 @@ export function zPdfGenerator(config: ZReportConfig, definition: ZReportDefiniti
       halign: 'left',
       valign: 'middle'
     },
-    body: pdfSectionGenerator('Resultados')
+    body: pdfSectionGenerator(tService.t('lbl_results'))
   });
 
   // ? PDF Table

@@ -1,3 +1,5 @@
+// ! Locale
+export * from './lib/locale';
 // ! Pipes
 export * from './lib/pipes/index';
 // ! Services

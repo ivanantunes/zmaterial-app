@@ -11,12 +11,12 @@
     <h1 class="report-title text-center">{{getReportConfig.title}} - {{getReportConfig.reportTitle}}</h1>
 
     <p class="report-subtile">
-      <strong>Data / Hora: </strong>
+      <strong>{{'lbl_data_time_create' | zTranslate}} </strong>
       {{dateGenerateReport}}
     </p>
 
     <p class="report-subtile">
-      <strong>Total de Registros: </strong>
+      <strong>{{'lbl_total_records' | zTranslate}} </strong>
       {{dataSource.length}}
     </p>
 
@@ -25,13 +25,13 @@
     <div class="report-actions" *ngIf="getReportConfig.actions">
 
       <button mat-raised-button color="accent" (click)="exportCSV()" *ngIf="getReportConfig.actions.csv" class="report-actions-button">
-        Exportar em .CSV <mat-icon>text_snippet</mat-icon>
+        {{'btn_export_file' | zTranslate}} .CSV <mat-icon>text_snippet</mat-icon>
       </button>
       <button mat-raised-button color="accent" (click)="exportPDF()"  *ngIf="getReportConfig.actions.pdf" class="report-actions-button">
-        Exportar em .PDF <mat-icon>description</mat-icon>
+        {{'btn_export_file' | zTranslate}} .PDF <mat-icon>description</mat-icon>
       </button>
       <button mat-raised-button color="accent" (click)="exportXLSX()" *ngIf="getReportConfig.actions.xlsx" class="report-actions-button">
-        Exportar em .XLSX <mat-icon>table_chart</mat-icon>
+        {{'btn_export_file' | zTranslate}} .XLSX <mat-icon>table_chart</mat-icon>
       </button>
 
     </div>
@@ -43,7 +43,7 @@
   <!-- ? Container Report Filters -->
   <div *ngIf="getReportConfig.filters.length > 0">
 
-    <h2 class="margin-top" id="filters-report-title">Filtros do Relatório</h2>
+    <h2 class="margin-top" id="filters-report-title">{{'lbl_filteres_report' | zTranslate}}</h2>
 
     <div *ngFor="let filter of getReportConfig.filters">
       <p class="report-filter-text"><strong>{{filter.title}}:</strong> {{filter.value}}</p>
@@ -78,5 +78,5 @@
 </mat-card>
 
 <ng-template #error>
-  <p>Configuração do Relatório Não Definida!</p>
+  <p>{{'lbl_not_found_config_report' | zTranslate}}</p>
 </ng-template>

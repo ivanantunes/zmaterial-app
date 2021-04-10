@@ -17,12 +17,12 @@
         <span class="header-spacer"></span>
 
         <!-- ? Button Language -->
-        <button mat-icon-button matTooltip="Linguagem" matTooltipPosition="below" [matMenuTriggerFor]="choiceLang">
+        <button mat-icon-button [matTooltip]="'btn_choose_langue' | zTranslate" matTooltipPosition="below" [matMenuTriggerFor]="choiceLang">
           <mat-icon>language</mat-icon>
         </button>
 
         <!-- ? Button Logout -->
-        <button mat-icon-button *ngIf="showLogout" (click)="logout.next(true)" matTooltip="Sair"
+        <button mat-icon-button *ngIf="showLogout" (click)="logout.next(true)" [matTooltip]="'btn_exit' | zTranslate"
           matTooltipPosition="below">
           <mat-icon>logout</mat-icon>
         </button>
@@ -40,7 +40,7 @@
 
           <mat-card-content>
 
-            <img class="profile-img" matTooltip="Foto de Perfil" matTooltipPosition="above"
+            <img class="profile-img" [matTooltip]="'lbl_profile_picture' | zTranslate" matTooltipPosition="above"
               [src]="profile.img ? profile.img : 'assets/no-profile.jpeg'" width="100px" height="100px">
 
             <div *ngIf="profile.descriptions">
@@ -110,7 +110,7 @@
       <span class="header-spacer"></span>
 
       <!-- ? Button Language -->
-      <button mat-icon-button matTooltip="Linguagem" matTooltipPosition="below" [matMenuTriggerFor]="choiceLang">
+      <button mat-icon-button [matTooltip]="'btn_choose_langue' | zTranslate" matTooltipPosition="below" [matMenuTriggerFor]="choiceLang">
         <mat-icon>language</mat-icon>
       </button>
 
@@ -124,7 +124,7 @@
 
 <ng-template #noProviderMenu>
   <div>
-    Menu Não Definido.
+    {{'lbl_not_provider_menu' | zTranslate}}
   </div>
 </ng-template>
 

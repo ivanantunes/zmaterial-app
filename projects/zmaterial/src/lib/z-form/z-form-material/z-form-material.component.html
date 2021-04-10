@@ -2,7 +2,7 @@
   <mat-spinner *ngIf="showLoading"></mat-spinner>
 
   <div *ngIf="!formProvider">
-    Nenhum Form Provider Definido.
+    {{'lbl_not_found_provider' | zTranslate}}
   </div>
 
 </div>
@@ -55,7 +55,7 @@
 
     <button *ngIf="showClearButton" type="button" mat-raised-button color="accent" (click)="reset($event)"
     [disabled]="showLoading">
-      Limpar Campos
+      {{'btn_clear_fields' | zTranslate}}
     </button>
 
   </mat-card-actions>

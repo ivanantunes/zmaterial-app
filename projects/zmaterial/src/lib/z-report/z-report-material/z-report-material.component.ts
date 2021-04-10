@@ -1,3 +1,4 @@
+import { ZTranslateService } from '../../services/z-translate.service';
 import { ZReportConfig } from './../interfaces/z-report-config';
 import { Component, Input, OnInit } from '@angular/core';
 import { ZReportProvider } from '../providers';
@@ -19,7 +20,7 @@ export class ZReportMaterialComponent implements OnInit {
   public dataSource: any[];
   public dateGenerateReport = new Date().toLocaleString();
 
-  constructor(private modal: ZModalService) { }
+  constructor(private modal: ZModalService, private tService: ZTranslateService) { }
 
   get getReportDefinition(): ZReportDefinition<any>[] {
     if (!this.reportProvider) {
@@ -48,9 +49,9 @@ export class ZReportMaterialComponent implements OnInit {
       catchError((err) => {
         console.log('Falha ao Setar Valor: ', err);
         this.modal.zModalTError({
-          title: 'Erro',
-          description: 'Falha ao Setar Valores',
-          btnCloseTitle: 'Fechar',
+          title: this.tService.t('lbl_error'),
+          description: this.tService.t('mdl_fail_set_values'),
+          btnCloseTitle: this.tService.t('btn_close'),
           isDisableClose: true
         });
         return of([]);
@@ -62,7 +63,7 @@ export class ZReportMaterialComponent implements OnInit {
   }
 
   public exportPDF(): void {
-    zPdfGenerator(this.getReportConfig, this.getReportDefinition, this.dataSource);
+    zPdfGenerator(this.getReportConfig, this.getReportDefinition, this.dataSource, this.tService);
   }
 
   public exportXLSX(): void {

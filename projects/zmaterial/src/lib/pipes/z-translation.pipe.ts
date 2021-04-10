@@ -8,7 +8,7 @@ export class ZTranslationPipe implements PipeTransform {
 
   constructor(private tService: ZTranslateService) { }
 
-  public transform(text: string, value?: any): unknown {
+  public transform(text: string, value?: any): string {
     return this.tService.t(text, value);
   }
 
