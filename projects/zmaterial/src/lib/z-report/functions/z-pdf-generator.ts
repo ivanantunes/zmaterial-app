@@ -81,7 +81,7 @@ function pdfTableStyle(config: ZReportConfig): any {
       fontStyle: 'bold',
       font: 'times',
       fillColor: config.color ? config.color.header : '000000',
-      textColor:  config.color ? config.color.headerText : 'ffffff',
+      textColor: config.color ? config.color.headerText : 'ffffff',
       halign: 'center',
       valign: 'middle'
     },
@@ -89,7 +89,7 @@ function pdfTableStyle(config: ZReportConfig): any {
       fontSize: 9,
       fontStyle: 'bold',
       fillColor: config.color ? config.color.body : 'ffffff',
-      textColor:  config.color ? config.color.bodyText : '000000',
+      textColor: config.color ? config.color.bodyText : '000000',
       font: 'times',
       halign: 'center',
       valign: 'middle'
@@ -99,9 +99,62 @@ function pdfTableStyle(config: ZReportConfig): any {
       fontStyle: 'bold',
       font: 'times',
       fillColor: config.color ? config.color.footer : '000000',
-      textColor:  config.color ? config.color.footerText : 'ffffff',
+      textColor: config.color ? config.color.footerText : 'ffffff',
     },
-  }
+  };
+}
+
+function pdfCreatedAndTotalRows(date: Date, totalItems: number): any {
+  return [
+    [
+      {
+        content: 'Criado em',
+        colSpan: 1,
+        styles: {
+          fontStyle: 'bold',
+          fontSize: 10,
+          font: 'times',
+          valign: 'middle',
+          halign: 'left'
+        }
+      },
+      {
+        content: 'Total de Registros',
+        colSpan: 1,
+        styles: {
+          fontStyle: 'bold',
+          fontSize: 10,
+          font: 'times',
+          valign: 'middle',
+          halign: 'left'
+        }
+      }
+    ],
+    [
+      {
+        content: `${date.toLocaleDateString()} - ${date.toLocaleTimeString()}`,
+        colSpan: 1,
+        styles: {
+          fontStyle: 'bold',
+          fontSize: 8,
+          font: 'times',
+          valign: 'middle',
+          halign: 'left'
+        }
+      },
+      {
+        content: totalItems,
+        colSpan: 1,
+        styles: {
+          fontStyle: 'bold',
+          fontSize: 8,
+          font: 'manrope',
+          valign: 'middle',
+          halign: 'left'
+        }
+      }
+    ]
+  ];
 }
 
 export function zPdfGenerator(config: ZReportConfig, definition: ZReportDefinition<any>[], data: any[]): void {
@@ -111,6 +164,8 @@ export function zPdfGenerator(config: ZReportConfig, definition: ZReportDefiniti
   const documentPdf = new jsPDF.jsPDF('landscape');
   const pageWidth = documentPdf.internal.pageSize.width;
   const pageHeight = documentPdf.internal.pageSize.height;
+  const currentDate = new Date();
+
 
   // ? Set Config PDF
 
@@ -141,8 +196,38 @@ export function zPdfGenerator(config: ZReportConfig, definition: ZReportDefiniti
 
   }
 
-  // ? PDF Section
+  // ? PDF Section Analysis
 
+  (documentPdf as any).autoTable({
+    theme: 'plain',
+    bodyStyles: {
+      halign: 'left',
+      valign: 'middle'
+    },
+    body: pdfSectionGenerator('Análises')
+  });
+
+  // ? PDF Analysis
+
+  (documentPdf as any).autoTable({
+    theme: 'plain',
+    tableWidth: 'wrap',
+    margin: 0,
+    bodyStyles: {
+      halign: 'left',
+      valign: 'middle',
+      cellHeight: 0,
+      cellPadding: {
+        top: 0,
+        right: 6,
+        bottom: 0,
+        left: 0
+      }
+    },
+    body: pdfCreatedAndTotalRows(currentDate, data.length)
+  });
+
+  // ? PDF Section Results
   (documentPdf as any).autoTable({
     theme: 'plain',
     bodyStyles: {
@@ -173,7 +258,7 @@ export function zPdfGenerator(config: ZReportConfig, definition: ZReportDefiniti
     documentPdf.setFontSize(8);
     documentPdf.setFont('times', 'bold');
     documentPdf.setTextColor(config.color ? config.color.text : '000000');
-    documentPdf.text(`Pág ${String(j)} de ${String(pageCount)}`, pageWidth - 14, pageHeight - 10, {align: 'right'});
+    documentPdf.text(`Pág ${String(j)} de ${String(pageCount)}`, pageWidth - 14, pageHeight - 10, { align: 'right' });
 
   }
 
@@ -181,9 +266,8 @@ export function zPdfGenerator(config: ZReportConfig, definition: ZReportDefiniti
   // documentPdf.output('dataurlnewwindow');
 
   // ? Save PDF
-  const currentDate = new Date();
 
   documentPdf.save(
-    `${config.reportTitle}_${currentDate.toLocaleString().replace(' ', '_')}.pdf`
+    `${config.reportTitle}_${currentDate.toLocaleString()}.pdf`.replace(/\//g, '_')
   );
 }

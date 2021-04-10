@@ -24,13 +24,13 @@
 
     <div class="report-actions" *ngIf="getReportConfig.actions">
 
-      <button mat-raised-button color="accent" *ngIf="getReportConfig.actions.csv" class="report-actions-button">
+      <button mat-raised-button color="accent" (click)="exportCSV()" *ngIf="getReportConfig.actions.csv" class="report-actions-button">
         Exportar em .CSV <mat-icon>text_snippet</mat-icon>
       </button>
       <button mat-raised-button color="accent" (click)="exportPDF()"  *ngIf="getReportConfig.actions.pdf" class="report-actions-button">
         Exportar em .PDF <mat-icon>description</mat-icon>
       </button>
-      <button mat-raised-button color="accent" *ngIf="getReportConfig.actions.xlsx" class="report-actions-button">
+      <button mat-raised-button color="accent" (click)="exportXLSX()" *ngIf="getReportConfig.actions.xlsx" class="report-actions-button">
         Exportar em .XLSX <mat-icon>table_chart</mat-icon>
       </button>
 

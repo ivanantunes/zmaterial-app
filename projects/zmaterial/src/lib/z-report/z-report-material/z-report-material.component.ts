@@ -5,7 +5,7 @@ import { catchError } from 'rxjs/operators';
 import { of } from 'rxjs';
 import { ZModalService } from '../../z-modal';
 import { ZReportDefinition } from '../interfaces';
-import { zPdfGenerator } from '../functions';
+import { zPdfGenerator, zXlsxGenerator, zCsvGenerator } from '../functions';
 
 @Component({
   selector: 'z-report-material',
@@ -65,4 +65,11 @@ export class ZReportMaterialComponent implements OnInit {
     zPdfGenerator(this.getReportConfig, this.getReportDefinition, this.dataSource);
   }
 
+  public exportXLSX(): void {
+    zXlsxGenerator(this.getReportConfig, this.getReportDefinition, this.dataSource);
+  }
+
+  public exportCSV(): void {
+    zCsvGenerator(this.getReportConfig, this.getReportDefinition, this.dataSource);
+  }
 }
