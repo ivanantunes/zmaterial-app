@@ -2,6 +2,7 @@
 
 .modal-header {
   padding: 0 24px;
+  display: contents;
 }
 
 .modal-header-title {
@@ -114,5 +115,17 @@ svg {
 
   100% {
     stroke-dashoffset: 900;
+  }
+}
+
+@media (max-width: 600px) {
+  .modal-body-button {
+    display: block;
+    margin: 2% auto;
+  }
+
+  .modal-actions {
+    display: grid;
+    justify-content: center;
   }
 }
