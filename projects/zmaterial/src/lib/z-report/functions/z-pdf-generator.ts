@@ -207,7 +207,7 @@ export function zPdfGenerator(
       halign: 'left',
       valign: 'middle'
     },
-    body: pdfSectionGenerator(tService.t('lbl_analysis'))
+    body: pdfSectionGenerator(tService.t('lbl_analysis'), config.color)
   });
 
   // ? PDF Analysis
@@ -237,7 +237,7 @@ export function zPdfGenerator(
       halign: 'left',
       valign: 'middle'
     },
-    body: pdfSectionGenerator(tService.t('lbl_results'))
+    body: pdfSectionGenerator(tService.t('lbl_results'), config.color)
   });
 
   // ? PDF Table
