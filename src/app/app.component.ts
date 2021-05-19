@@ -29,6 +29,13 @@ export class AppComponent {
       itens: [
         { label: 'Logs', link: 'report/logs' }
       ]
+    },
+    {
+      category: 'Metadata',
+      icon: 'build',
+      itens: [
+        { label: 'Exemplo', link: 'metadata/METADATA_EXEMPLO' }
+      ]
     }
   ];
 

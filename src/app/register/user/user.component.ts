@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { delay, switchMap } from 'rxjs/operators';
-import { ZFormInputBase, ZFormInputText, ZFormProvider, ZFormInputSelect, ZSearchResult } from 'zmaterial';
+import { ZFormInputBase, ZFormInputText, ZFormProvider, ZFormInputSelect, ZSearchResult, ZFormInputDateTime } from 'zmaterial';
 
 @Component({
   selector: 'app-user',
@@ -148,6 +148,14 @@ export class UserComponent extends ZFormProvider implements OnInit {
         label: 'Campo de Placa',
         key: 'vehiclePlate',
         type: 'vehiclePlate',
+        required: true,
+        layout: {
+          cols: 50
+        }
+      }),
+      new ZFormInputDateTime({
+        label: 'Campo de Data / Hora',
+        key: 'datetime',
         required: true,
         layout: {
           cols: 50

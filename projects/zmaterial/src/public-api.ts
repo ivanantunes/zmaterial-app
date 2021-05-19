@@ -14,4 +14,5 @@ export * from './lib/z-menu/index';
 export * from './lib/z-form/index';
 // ! z-report
 export * from './lib/z-report/index';
-
+// ! z-report-builder
+export * from './lib/z-report-builder/index';

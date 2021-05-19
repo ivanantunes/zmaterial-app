@@ -3,6 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { CourseComponent } from './register/course/course.component';
 import { UserComponent } from './register/user/user.component';
 import { LogsComponent } from './report/logs/logs.component';
+import { ReportBuilderComponent } from './report/report-builder/report-builder.component';
 
 const routes: Routes = [
   {
@@ -19,6 +20,10 @@ const routes: Routes = [
   {
     path: 'report/logs',
     component: LogsComponent,
+  },
+  {
+    path: 'metadata/:screen',
+    component: ReportBuilderComponent
   },
   {
     path: '',

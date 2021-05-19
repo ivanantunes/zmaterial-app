@@ -5,7 +5,8 @@ import { debounceTime, delay, filter, finalize, map, switchMap, tap } from 'rxjs
 import {
   ZFormInputBase,
   ZFormInputText,
-  ZFormInputSelect
+  ZFormInputSelect,
+  ZFormInputDateTime
 } from '../form-inputs';
 import { ZSearchResult } from '../interfaces';
 import { ZFormService } from '../z-form.service';
@@ -50,7 +51,7 @@ export class ZInputMaterialComponent implements OnInit {
 
   get asInputText(): ZFormInputText { return this.input as ZFormInputText; }
   get asInputSelect(): ZFormInputSelect<any, any> { return this.input as ZFormInputSelect<any, any>; }
-
+  get asInputDateTime(): ZFormInputDateTime { return this.input as ZFormInputDateTime; }
 
   public getErrors(control: AbstractControl): string[] {
     return Object.keys(control.errors);

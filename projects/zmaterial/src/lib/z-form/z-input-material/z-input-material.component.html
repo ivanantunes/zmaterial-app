@@ -92,7 +92,25 @@
 
     </div>
 
+    <!-- ? Input | DateTime -->
 
+    <div *ngSwitchCase="'dateTime'">
+      <mat-form-field  class="full-width" appearance="outline" [hintLabel]="input.hint">
+        <mat-label>{{input.label}}</mat-label>
+
+        <input matInput [ngxMatDatetimePicker]="time" [required]="input.required" [min]="asInputDateTime.minDate"
+          [max]="asInputDateTime.maxDate" [formControl]="input.currentControl">
+        <button type="button" mat-icon-button matSuffix (click)="time.open(); $event.stopPropagation();">
+          <mat-icon>today</mat-icon>
+        </button>
+        <ngx-mat-datetime-picker #time></ngx-mat-datetime-picker>
+
+        <mat-error>
+          <ng-container *ngTemplateOutlet="errorsTemplate"></ng-container>
+        </mat-error>
+
+      </mat-form-field>
+    </div>
 
   </div>
 
@@ -152,8 +170,9 @@
 
 </ng-template>
 
+
 <ng-template #defaultMatOptionTemplate let-result='item'>
-  <img *ngIf="asInputSelect.displayImageSelect" aria-hidden
+  <img *ngIf="asInputSelect.displayImageSelect && asInputSelect.displayImageSelect(result)" aria-hidden
     [src]="asInputSelect.displayImageSelect(result) || 'assets/no-profile.jpeg'" height="25">
   <span>{{ asInputSelect.firstDisplaySelect(result) }}</span>
   <small *ngIf="asInputSelect.secondaryDisplaySelect"> | {{ asInputSelect.secondaryDisplaySelect(result) }}</small>

@@ -21,6 +21,12 @@ import { ZLanguageData, ZTranslateService } from './services';
 // Pipe
 import { ZTranslationPipe } from './pipes/z-translation.pipe';
 
+// Providers
+import { MatDateTimeIntlProvider } from './providers';
+
+// Ngx
+import { NgxMatDatetimePickerModule, NgxMatNativeDateModule } from '@angular-material-components/datetime-picker';
+
 // Material
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
@@ -39,6 +45,8 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { MatTableModule } from '@angular/material/table';
+import { MatStepperModule } from '@angular/material/stepper';
+import { MatTabsModule } from '@angular/material/tabs';
 
 @NgModule({
   declarations: [
@@ -47,6 +55,10 @@ import { MatTableModule } from '@angular/material/table';
   imports: [
     // Base
     CommonModule,
+
+    // Ngx
+    NgxMatDatetimePickerModule,
+    NgxMatNativeDateModule,
 
     // Material
     MatButtonModule,
@@ -66,6 +78,8 @@ import { MatTableModule } from '@angular/material/table';
     MatAutocompleteModule,
     MatGridListModule,
     MatTableModule,
+    MatStepperModule,
+    MatTabsModule,
 
     // Forms
     ReactiveFormsModule,
@@ -76,6 +90,10 @@ import { MatTableModule } from '@angular/material/table';
 
   ],
   exports: [
+    // Ngx
+    NgxMatDatetimePickerModule,
+    NgxMatNativeDateModule,
+
     // Material
     MatButtonModule,
     MatCardModule,
@@ -94,6 +112,8 @@ import { MatTableModule } from '@angular/material/table';
     MatAutocompleteModule,
     MatGridListModule,
     MatTableModule,
+    MatStepperModule,
+    MatTabsModule,
 
     // Forms
     ReactiveFormsModule,
@@ -114,6 +134,7 @@ export class ZModule {
     return {
       ngModule: ZModule,
       providers: [
+        MatDateTimeIntlProvider,
         ZTranslateService,
         {provide: 'langConfig', useValue: config.languageData}
       ]

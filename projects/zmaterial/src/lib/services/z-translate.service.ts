@@ -1,8 +1,14 @@
 import { Inject, Injectable } from '@angular/core';
 import i18next, { TFunction } from 'i18next';
 import LanguageDetector from 'i18next-browser-languagedetector';
-import { from, Observable, Subject } from 'rxjs';
-import { zFormTranslate, zGenericTranslate, zMenuTranslate, zReportTranslate } from '../locale';
+import { from, Observable } from 'rxjs';
+import {
+  zFormTranslate,
+  zGenericTranslate,
+  zMenuTranslate,
+  zReportBuilderTranslate,
+  zReportTranslate
+} from '../locale';
 
 export interface ZLanguageData {
   pt: any;
@@ -26,7 +32,8 @@ export class ZTranslateService {
         ...zGenericTranslate.pt,
         ...zFormTranslate.pt,
         ...zMenuTranslate.pt,
-        ...zReportTranslate.pt
+        ...zReportTranslate.pt,
+        ...zReportBuilderTranslate.pt
       }
     };
 
@@ -36,7 +43,8 @@ export class ZTranslateService {
         ...zGenericTranslate.en,
         ...zFormTranslate.en,
         ...zMenuTranslate.en,
-        ...zReportTranslate.en
+        ...zReportTranslate.en,
+        ...zReportBuilderTranslate.en
       }
     };
 
@@ -66,6 +74,23 @@ export class ZTranslateService {
 
   public getCurrentLanguage(): string {
     return i18next.language;
+  }
+
+  public getDateTimeLocale(): string {
+    const lang = navigator.language;
+
+    if (!lang) {
+
+      const [lang2] = navigator.languages;
+      if (lang2) {
+        return lang2;
+      } else {
+        return 'pt';
+      }
+
+    } else {
+      return lang;
+    }
   }
 
   public setCurrentLanguage(lng: string): Observable<any> {
