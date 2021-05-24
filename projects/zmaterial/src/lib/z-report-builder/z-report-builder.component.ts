@@ -41,8 +41,9 @@ export class ZReportBuilderComponent implements OnInit {
         btnCloseTitle: this.tService.t('btn_close')
       });
 
-    } else {
+    }
 
+    if (this.source !== null) {
       this.refresh();
     }
 
@@ -78,6 +79,21 @@ export class ZReportBuilderComponent implements OnInit {
 
     this.source.getFilteredReportData(this.screen, value).subscribe((data) => {
       this.source.setReportData(data);
+      this.source.metadata.reportHeader.filters = this.source.metadata.form.inputs.map((field) => {
+
+        if (field.relation) {
+          return {
+            title: field.label,
+            value: value[field.key][field.relation.fieldDescription]
+          };
+        }
+
+        return {
+          title: field.label,
+          value: value[field.key]
+        };
+
+      });
       this.selectedTab = ReportBuilderTab.report;
 
       this.loading = false;

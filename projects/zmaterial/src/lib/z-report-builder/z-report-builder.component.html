@@ -1,4 +1,4 @@
-<mat-tab-group *ngIf="source else error" animationDuration="200ms" [selectedIndex]="selectedTab" (selectedIndexChange)="didChangeTab($event)">
+<mat-tab-group *ngIf="source !== null; else error" animationDuration="200ms" [selectedIndex]="selectedTab" (selectedIndexChange)="didChangeTab($event)">
   <mat-tab>
 
     <ng-template mat-tab-label>
