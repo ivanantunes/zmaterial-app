@@ -1,7 +1,10 @@
 import * as xlsx from 'xlsx';
+import { ZTranslateService } from '../../services';
 import { ZReportConfig, ZReportDefinition } from '../interfaces';
 
-export function zCsvGenerator(config: ZReportConfig, definition: ZReportDefinition<any>[], data: any[]): void {
+export function zCsvGenerator(
+  config: ZReportConfig, definition: ZReportDefinition<any>[], data: any[], tService: ZTranslateService
+): void {
   const currentDate = new Date();
   const excel = xlsx.utils.book_new();
 
@@ -15,7 +18,7 @@ export function zCsvGenerator(config: ZReportConfig, definition: ZReportDefiniti
 
   const workSheet = xlsx.utils.aoa_to_sheet(excelData);
 
-  xlsx.utils.book_append_sheet(excel, workSheet, config.reportTitle);
+  xlsx.utils.book_append_sheet(excel, workSheet, currentDate.toLocaleString().replace(/\//g, '_'));
 
   const workAbout = xlsx.write(excel, {bookType: 'csv', type: 'binary'});
 
@@ -34,7 +37,7 @@ export function zCsvGenerator(config: ZReportConfig, definition: ZReportDefiniti
   document.body.appendChild(a);
   const url = window.URL.createObjectURL(blob);
   a.href = url;
-  a.download = `${config.reportTitle}_${currentDate.toLocaleString()}.csv`;
+  a.download = `${tService.t('lbl_report')}_${currentDate.toLocaleString()}.csv`.replace(/\//g, '_');
   a.click();
   window.URL.revokeObjectURL(url);
 

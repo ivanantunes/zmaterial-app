@@ -1,7 +1,10 @@
 import * as xlsx from 'xlsx';
+import { ZTranslateService } from '../../services';
 import { ZReportConfig, ZReportDefinition } from '../interfaces';
 
-export function zXlsxGenerator(config: ZReportConfig, definition: ZReportDefinition<any>[], data: any[]): void {
+export function zXlsxGenerator(
+  config: ZReportConfig, definition: ZReportDefinition<any>[], data: any[], tService: ZTranslateService
+  ): void {
   const currentDate = new Date();
   const excel = xlsx.utils.book_new();
 
@@ -15,7 +18,7 @@ export function zXlsxGenerator(config: ZReportConfig, definition: ZReportDefinit
 
   const workSheet = xlsx.utils.aoa_to_sheet(excelData);
 
-  xlsx.utils.book_append_sheet(excel, workSheet, config.reportTitle);
+  xlsx.utils.book_append_sheet(excel, workSheet, currentDate.toLocaleString().replace(/\//g, '_'));
 
   const workAbout = xlsx.write(excel, {bookType: 'xlsx', type: 'binary'});
 
@@ -34,7 +37,7 @@ export function zXlsxGenerator(config: ZReportConfig, definition: ZReportDefinit
   document.body.appendChild(a);
   const url = window.URL.createObjectURL(blob);
   a.href = url;
-  a.download = `${config.reportTitle}_${currentDate.toLocaleString()}.xlsx`;
+  a.download =  `${tService.t('lbl_report')}_${currentDate.toLocaleString()}.xlsx`.replace(/\//g, '_');
   a.click();
   window.URL.revokeObjectURL(url);
 

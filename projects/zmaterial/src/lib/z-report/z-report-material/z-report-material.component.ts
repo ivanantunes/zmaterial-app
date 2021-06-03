@@ -67,10 +67,10 @@ export class ZReportMaterialComponent implements OnInit {
   }
 
   public exportXLSX(): void {
-    zXlsxGenerator(this.getReportConfig, this.getReportDefinition, this.dataSource);
+    zXlsxGenerator(this.getReportConfig, this.getReportDefinition, this.dataSource, this.tService);
   }
 
   public exportCSV(): void {
-    zCsvGenerator(this.getReportConfig, this.getReportDefinition, this.dataSource);
+    zCsvGenerator(this.getReportConfig, this.getReportDefinition, this.dataSource, this.tService);
   }
 }

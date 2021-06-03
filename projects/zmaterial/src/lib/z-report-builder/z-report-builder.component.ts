@@ -1,11 +1,15 @@
+import { map } from 'rxjs/operators';
 import { FormGroup } from '@angular/forms';
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import { ZTranslateService } from '../services';
 import { ZModalService } from '../z-modal';
 import { ZReportSource } from './class';
+import { MatSelectionList } from '@angular/material/list';
+import { ZReportField, ZReportMetadata } from './interfaces';
 
 enum ReportBuilderTab {
   filter,
+  choose,
   report
 }
 
@@ -20,9 +24,13 @@ export class ZReportBuilderComponent implements OnInit {
   @Input() source: ZReportSource;
   @Input() screen: string;
 
+  // ? DOM
+  @ViewChild('fields') fields: MatSelectionList;
+
   // ? Global
   public loading = false;
   public selectedTab = ReportBuilderTab.filter;
+  public metadataField: ZReportField[];
 
   // ? Form
   public formFilter: FormGroup = new FormGroup({});
@@ -33,7 +41,7 @@ export class ZReportBuilderComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    if (!this.screen) {
+    if (!this.screen || !this.source) {
 
       this.modal.zModalTError({
         title: this.tService.t('lbl_error'),
@@ -54,6 +62,7 @@ export class ZReportBuilderComponent implements OnInit {
 
     this.source.getMetadata(this.screen).subscribe((metadata) => {
       this.source.metadata = metadata;
+      this.metadataField = metadata.fields;
 
       this.loading = false;
     }, (error) => {
@@ -75,32 +84,47 @@ export class ZReportBuilderComponent implements OnInit {
   }
 
   public submitFilter(value: any): void {
-    this.loading = true;
+    this.selectedTab = ReportBuilderTab.choose;
+  }
 
-    this.source.getFilteredReportData(this.screen, value).subscribe((data) => {
+  public choiceFields(): void {
+    const arrFields = this.fields.selectedOptions.selected.map((f) => f.value);
+
+    this.source.getFilteredReportData(this.screen, this.formFilter.value).pipe(
+      map((data) => data.map((row) => {
+        const newObject: any = {};
+
+        arrFields.forEach((f) => {
+
+          newObject[f.key] = row[f.key];
+
+        });
+
+        return newObject;
+
+      })),
+    ).subscribe((data) => {
       this.source.setReportData(data);
       this.source.metadata.reportHeader.filters = this.source.metadata.form.inputs.map((field) => {
 
         if (field.relation) {
           return {
             title: field.label,
-            value: value[field.key][field.relation.fieldDescription]
+            value: this.formFilter.value[field.key][field.relation.fieldDescription]
           };
         }
 
         return {
           title: field.label,
-          value: value[field.key]
+          value: this.formFilter.value[field.key]
         };
 
       });
+      this.source.metadata.fields = arrFields;
+
       this.selectedTab = ReportBuilderTab.report;
 
-      this.loading = false;
-
     }, (err) => {
-
-      this.loading = false;
 
       this.modal.zModalTError({
         title: this.tService.t('lbl_error'),
@@ -109,7 +133,6 @@ export class ZReportBuilderComponent implements OnInit {
       });
 
     });
-
 
   }
 

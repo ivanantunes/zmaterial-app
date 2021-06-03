@@ -1,4 +1,5 @@
-<mat-tab-group *ngIf="source !== null; else error" animationDuration="200ms" [selectedIndex]="selectedTab" (selectedIndexChange)="didChangeTab($event)">
+<mat-tab-group *ngIf="source !== null && source !== undefined else SourceError" animationDuration="200ms" [selectedIndex]="selectedTab" (selectedIndexChange)="didChangeTab($event)">
+
   <mat-tab>
 
     <ng-template mat-tab-label>
@@ -6,7 +7,7 @@
       {{'lbl_filter' | zTranslate}}
     </ng-template>
 
-    <z-form-material
+    <z-form-material *ngIf="source && source.metadata && source.metadata.form"
     [title]="source.metadata.form.title"
     [subtitle]="source.metadata.form.subtitle"
     [submitText]="source.metadata.form.submitText"
@@ -21,18 +22,54 @@
   <mat-tab [disabled]="selectedTab === 0">
 
     <ng-template mat-tab-label>
+      <mat-icon class="tab-icon">view_column</mat-icon>
+      {{'lbl_column' | zTranslate}}
+    </ng-template>
+
+    <mat-card style="width: 98%; margin: 1% auto;">
+
+      <mat-card-header>
+        <mat-card-title>{{'fields_report' | zTranslate}}</mat-card-title>
+      </mat-card-header>
+
+      <mat-card-content>
+
+        <mat-selection-list #fields>
+
+          <mat-list-option *ngFor="let field of metadataField" [value]="field" [selected]="field.required">
+            {{field.label}}
+          </mat-list-option>
+
+        </mat-selection-list>
+
+      </mat-card-content>
+
+      <mat-card-actions>
+
+        <button mat-raised-button color="primary" (click)="choiceFields()">{{'btn_choice' | zTranslate}}</button>
+        <button mat-raised-button color="accent" (click)="fields.deselectAll()">{{'btn_clear_choices' | zTranslate}}</button>
+
+      </mat-card-actions>
+
+    </mat-card>
+
+  </mat-tab>
+
+  <mat-tab [disabled]="selectedTab !== 2">
+
+    <ng-template mat-tab-label>
       <mat-icon class="tab-icon">table_chart</mat-icon>
       {{'lbl_report' | zTranslate}}
     </ng-template>
 
-    <z-report-material *ngIf="selectedTab === 1" [reportProvider]="source"></z-report-material>
+    <z-report-material *ngIf="selectedTab === 2" [reportProvider]="source"></z-report-material>
 
   </mat-tab>
 
 
 </mat-tab-group>
 
-<ng-template #error>
+<ng-template #SourceError>
 
   <p>{{'lbl_source_undefined' | zTranslate}}</p>
 

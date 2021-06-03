@@ -271,6 +271,6 @@ export function zPdfGenerator(
   // ? Save PDF
 
   documentPdf.save(
-    `${config.reportTitle}_${currentDate.toLocaleString()}.pdf`.replace(/\//g, '_')
+    `${tService.t('lbl_report')}_${currentDate.toLocaleString()}.pdf`.replace(/\//g, '_')
   );
 }

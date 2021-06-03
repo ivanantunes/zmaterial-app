@@ -5,7 +5,12 @@ export const MetadataExemplo: ZReportMetadata = {
   reportHeader: {
     reportTitle: 'Exemplo de Relatorio por Metadata',
     title: 'Exemplo',
-    filters: []
+    filters: [],
+    actions: {
+      pdf: true,
+      xlsx: true,
+      csv: true
+    }
   },
   fields: [
     {
