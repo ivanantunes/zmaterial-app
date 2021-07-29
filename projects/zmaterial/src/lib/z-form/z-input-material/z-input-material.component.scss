@@ -10,3 +10,17 @@
   display: flex;
   justify-content: center;
 }
+
+.arrayFieldContainer {
+  padding: 2%;
+  border: 2px;
+  border-style: solid;
+  border-radius: 5px;
+  margin-bottom: 20px;
+}
+
+.deleteRowBtn {
+  float: right;
+  z-index: 2;
+  margin-bottom: -3%;
+}

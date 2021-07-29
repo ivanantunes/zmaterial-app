@@ -7,6 +7,7 @@ export const zFormTranslate: ZLanguageData = {
     lbl_not_found_provider: 'Nenhum Formulário Definido.',
     lbl_result_not_found: 'Nenhum Resultado Encontrado',
     lbl_result_not_complet: 'Resultado Não Completo. Refine sua Busca.',
+    lbl_arr_add_field: 'Adicionar {{field}}',
 
     frm_validator_required: 'é Obrigatório.',
     frm_validator_email: 'Não é um e-mail válido.',
@@ -24,6 +25,7 @@ export const zFormTranslate: ZLanguageData = {
     lbl_not_found_provider: 'No Forms Defined.',
     lbl_result_not_found: 'No Results Found',
     lbl_result_not_complet: 'Result Not Complete. Refine Your Search.',
+    lbl_arr_add_field: 'Add {{field}}',
 
     frm_validator_required: 'is Required.',
     frm_validator_email: 'It is not a valid email.',

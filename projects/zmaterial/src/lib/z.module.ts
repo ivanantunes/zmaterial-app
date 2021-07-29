@@ -49,6 +49,7 @@ import { MatGridListModule } from '@angular/material/grid-list';
 import { MatTableModule } from '@angular/material/table';
 import { MatStepperModule } from '@angular/material/stepper';
 import { MatTabsModule } from '@angular/material/tabs';
+import { MatBadgeModule } from '@angular/material/badge';
 
 @NgModule({
   declarations: [
@@ -83,6 +84,7 @@ import { MatTabsModule } from '@angular/material/tabs';
     MatTableModule,
     MatStepperModule,
     MatTabsModule,
+    MatBadgeModule,
 
     // Forms
     ReactiveFormsModule,
@@ -118,6 +120,7 @@ import { MatTabsModule } from '@angular/material/tabs';
     MatTableModule,
     MatStepperModule,
     MatTabsModule,
+    MatBadgeModule,
 
     // Forms
     ReactiveFormsModule,

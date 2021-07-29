@@ -1,5 +1,5 @@
 import { Component, Input, NgZone, OnInit } from '@angular/core';
-import { AbstractControl, FormGroup } from '@angular/forms';
+import { AbstractControl, FormArray, FormGroup } from '@angular/forms';
 import { merge, Observable, Subject } from 'rxjs';
 import { debounceTime, delay, filter, finalize, map, switchMap, tap } from 'rxjs/operators';
 import {
@@ -9,7 +9,9 @@ import {
   ZFormInputDateTime,
   ZFormInputTime,
   ZFormInputTextArea,
-  ZFormInputFile
+  ZFormInputFile,
+  ZInput,
+  ZFormInputArray
 } from '../form-inputs';
 import { ZSearchResult } from '../interfaces';
 import { ZFormService } from '../z-form.service';
@@ -23,12 +25,18 @@ export class ZInputMaterialComponent implements OnInit {
 
   @Input() input: ZFormInputBase<any>;
   @Input() form: FormGroup;
+  @Input() isArray = false;
+  @Input() fieldIndex: number;
+
+  private arrayFieldIndex: number;
 
   public errorKeys: string[] = [];
   public selectLastResult: any[] = [];
   public focusSubject = new Subject<string>();
   public getDataObs: Observable<ZSearchResult<any>>;
   public isLoading = false;
+  public arrayGroupForm: FormArray;
+  public asArray: ZFormInputArray<any, ZFormInputBase<any>, ZInput<any>>;
 
   constructor(
     private formService: ZFormService,
@@ -59,6 +67,38 @@ export class ZInputMaterialComponent implements OnInit {
   get asInputTextArea(): ZFormInputTextArea { return this.input as ZFormInputTextArea; }
   get asInputFile(): ZFormInputFile { return this.input as ZFormInputFile; }
 
+  private setupArrayInput(ctr: AbstractControl): void {
+    this.arrayGroupForm = ctr as FormArray;
+    this.asArray = this.input as ZFormInputArray<any, ZFormInputBase<any>, ZInput<any>>;
+    this.arrayFieldIndex = this.arrayGroupForm.length;
+  }
+
+  public removeControl(i: string): void {
+    const questionToRemove = this.asArray.questions.find(c => c.key === i);
+
+    const ctrIdx = this.arrayGroupForm.controls.indexOf(questionToRemove.currentControl);
+    this.arrayGroupForm.removeAt(ctrIdx);
+
+    this.asArray.questions = this.asArray.questions.filter(c => c.key !== questionToRemove.key);
+  }
+
+  public convertArrayToGroup(formArray: FormArray): FormGroup {
+    return formArray as unknown as FormGroup;
+  }
+
+  public addControl(): void {
+    const idx = this.arrayFieldIndex++;
+
+    const newQ = new this.asArray.controlConstructor({
+      ...this.asArray.controlOptions,
+      key: String(idx)
+    });
+    const ctr = this.formService.inputControl(newQ);
+    this.arrayGroupForm.push(ctr);
+
+    this.asArray.questions.push(newQ);
+  }
+
   public getErrors(control: AbstractControl): string[] {
     return Object.keys(control.errors);
   }
@@ -69,6 +109,9 @@ export class ZInputMaterialComponent implements OnInit {
 
       case 'inputSelect':
         this.setupSelector(control);
+        break;
+      case 'zformArray':
+        this.setupArrayInput(control);
         break;
 
     }
