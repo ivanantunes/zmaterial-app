@@ -8,7 +8,8 @@ import {
   ZFormInputSelect,
   ZFormInputDateTime,
   ZFormInputTime,
-  ZFormInputTextArea
+  ZFormInputTextArea,
+  ZFormInputFile
 } from '../form-inputs';
 import { ZSearchResult } from '../interfaces';
 import { ZFormService } from '../z-form.service';
@@ -56,6 +57,7 @@ export class ZInputMaterialComponent implements OnInit {
   get asInputDateTime(): ZFormInputDateTime { return this.input as ZFormInputDateTime; }
   get asInputTime(): ZFormInputTime { return this.input as ZFormInputTime; }
   get asInputTextArea(): ZFormInputTextArea { return this.input as ZFormInputTextArea; }
+  get asInputFile(): ZFormInputFile { return this.input as ZFormInputFile; }
 
   public getErrors(control: AbstractControl): string[] {
     return Object.keys(control.errors);

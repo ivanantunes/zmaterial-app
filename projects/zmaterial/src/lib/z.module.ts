@@ -26,6 +26,8 @@ import { MatDateTimeIntlProvider } from './providers';
 
 // Ngx
 import { NgxMatDatetimePickerModule, NgxMatNativeDateModule } from '@angular-material-components/datetime-picker';
+import { NgxMatFileInputModule } from '@angular-material-components/file-input';
+
 
 // Material
 import { MatButtonModule } from '@angular/material/button';
@@ -59,6 +61,7 @@ import { MatTabsModule } from '@angular/material/tabs';
     // Ngx
     NgxMatDatetimePickerModule,
     NgxMatNativeDateModule,
+    NgxMatFileInputModule,
 
     // Material
     MatButtonModule,
@@ -93,6 +96,7 @@ import { MatTabsModule } from '@angular/material/tabs';
     // Ngx
     NgxMatDatetimePickerModule,
     NgxMatNativeDateModule,
+    NgxMatFileInputModule,
 
     // Material
     MatButtonModule,
