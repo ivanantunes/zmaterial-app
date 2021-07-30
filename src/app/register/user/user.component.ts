@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { delay, switchMap } from 'rxjs/operators';
-import { ZFormInputBase, ZFormInputText, ZFormProvider, ZFormInputSelect, ZSearchResult, ZFormInputDateTime } from 'zmaterial';
+import { ZFormInputBase, ZFormInputText, ZFormProvider, ZFormInputSelect, ZSearchResult, ZFormInputDateTime, ZFormInputTime, ZFormInputTextArea, ZFormInputFile, ZFormInputArray, ZInputFile } from 'zmaterial';
 
 @Component({
   selector: 'app-user',
@@ -159,6 +159,49 @@ export class UserComponent extends ZFormProvider implements OnInit {
         required: true,
         layout: {
           cols: 50
+        }
+      }),
+      new ZFormInputTime({
+        label: 'Campo de Hora',
+        key: 'time',
+        required: true,
+        layout: {
+          cols: 50
+        }
+      }),
+      new ZFormInputTextArea({
+        label: 'Campo de TextArea',
+        key: 'textArea',
+        required: true,
+        layout: {
+          cols: 100
+        }
+      }),
+      new ZFormInputFile({
+        label: 'Campo de Arquivo',
+        key: 'files',
+        required: true,
+        layout: {
+          cols: 100
+        },
+        multiple: true,
+        accept: 'image/png, image/jpeg, image/jpg'
+      }),
+      new ZFormInputArray<string, ZFormInputFile, ZInputFile>({
+        label: 'Foto array',
+        key: 'PhotoArray',
+        required: false,
+        startItens: 1,
+        controlConstructor: ZFormInputFile,
+        controlOptions: {
+          label: 'Campo de Arquivo',
+          key: 'files',
+          required: true,
+          layout: {
+            cols: 100
+          },
+          multiple: true,
+          accept: 'image/png, image/jpeg, image/jpg'
         }
       }),
       new ZFormInputSelect<string, any>({

@@ -112,76 +112,76 @@
       </mat-form-field>
     </div>
 
-  </div>
+    <div *ngSwitchCase="'inputTime'">
+      <mat-form-field  class="full-width" appearance="outline" [hintLabel]="input.hint">
 
-  <div *ngSwitchCase="'inputTime'">
-    <mat-form-field  class="full-width" appearance="outline" [hintLabel]="input.hint">
+        <mat-label>{{isArray ? input.label + ' - ' + fieldIndex  : input.label}}</mat-label>
 
-      <mat-label>{{isArray ? input.label + ' - ' + fieldIndex  : input.label}}</mat-label>
+        <input matInput type="text" [placeholder]="input.label"
+          [mask]="!asInputTime.isSeconds ? '00:00:00' : '00:00'" [dropSpecialCharacters]="false"
+          [formControl]="input.currentControl" [required]="input.required">
 
-      <input matInput type="text" [placeholder]="input.label"
-        [mask]="!asInputTime.isSeconds ? '00:00:00' : '00:00'" [dropSpecialCharacters]="false"
-        [formControl]="input.currentControl" [required]="input.required">
+        <mat-error>
+          <ng-container *ngTemplateOutlet="errorsTemplate"></ng-container>
+        </mat-error>
 
-      <mat-error>
-        <ng-container *ngTemplateOutlet="errorsTemplate"></ng-container>
-      </mat-error>
-
-    </mat-form-field>
-  </div>
-
-  <div *ngSwitchCase="'inputTextArea'">
-    <mat-form-field  class="full-width" appearance="outline" [hintLabel]="input.hint">
-
-      <mat-label>{{isArray ? input.label + ' - ' + fieldIndex  : input.label}}</mat-label>
-      <textarea matInput [placeholder]="input.label" [formControl]="input.currentControl" [name]="input.key"
-        [readonly] [maxlength]="asInputTextArea.maxLength" [rows]="asInputTextArea.rows" [id]="input.key"
-        [required]="input.required"></textarea>
-
-      <mat-error>
-        <ng-container *ngTemplateOutlet="errorsTemplate"></ng-container>
-      </mat-error>
-
-      <mat-hint *ngIf="asInputTextArea.maxLength" align="end">
-        {{currentControl.value.length || 0}}/{{asInputTextArea.maxLength}}</mat-hint>
-
-    </mat-form-field>
-  </div>
-
-  <div *ngSwitchCase="'inputFile'">
-    <mat-form-field  class="full-width" appearance="outline" [hintLabel]="input.hint">
-      <mat-label>{{isArray ? input.label + ' - ' + fieldIndex  : input.label}}</mat-label>
-      <ngx-mat-file-input [formControl]="input.currentControl" [required]="input.required"
-        [placeholder]="input.label" [multiple]="asInputFile.multiple" [accept]="asInputFile.accept">
-      </ngx-mat-file-input>
-      <mat-error>
-        <ng-container *ngTemplateOutlet="errorsTemplate"></ng-container>
-      </mat-error>
-    </mat-form-field>
-  </div>
-
-  <div *ngSwitchCase="'zformArray'" class="arrayFieldContainer">
-    <mat-label>{{isArray ? input.label + ' - ' + fieldIndex  : input.label}}</mat-label>
-    <div *ngFor="let q of asArray.questions; let i=index">
-      <button mat-mini-fab color="warn" class="deleteRowBtn"
-      [disabled]="asArray.questions.length <= asArray.minItens"
-      (click)="removeControl(q.key)">
-        <mat-icon>delete</mat-icon>
-      </button>
-      <z-input-material [input]="q" [form]="convertArrayToGroup(arrayGroupForm)" [isArray]="true" [fieldIndex]="i + 1"></z-input-material>
+      </mat-form-field>
     </div>
 
-    <div role="group">
-      <button type="button" mat-raised-button [matBadge]="asArray.questions.length"
-      [disabled]="asArray.questions.length >= asArray.maxItens" color="accent" (click)="addControl()">
-        <mat-icon>add</mat-icon>
-        {{ 'lbl_arr_add_field' | zTranslate: {field: asArray.controlOptions.label} }}
-      </button>
+    <div *ngSwitchCase="'inputTextArea'">
+      <mat-form-field  class="full-width" appearance="outline" [hintLabel]="input.hint">
+
+        <mat-label>{{isArray ? input.label + ' - ' + fieldIndex  : input.label}}</mat-label>
+        <textarea matInput [placeholder]="input.label" [formControl]="input.currentControl" [name]="input.key"
+          [readonly] [maxlength]="asInputTextArea.maxLength" [rows]="asInputTextArea.rows" [id]="input.key"
+          [required]="input.required"></textarea>
+
+        <mat-error>
+          <ng-container *ngTemplateOutlet="errorsTemplate"></ng-container>
+        </mat-error>
+
+        <mat-hint *ngIf="asInputTextArea.maxLength" align="end">
+          {{currentControl.value.length || 0}}/{{asInputTextArea.maxLength}}</mat-hint>
+
+      </mat-form-field>
     </div>
 
-    <mat-error>
-      <ng-container *ngTemplateOutlet="errorsTemplate"></ng-container>
-    </mat-error>
+    <div *ngSwitchCase="'inputFile'">
+      <mat-form-field  class="full-width" appearance="outline" [hintLabel]="input.hint">
+        <mat-label>{{isArray ? input.label + ' - ' + fieldIndex  : input.label}}</mat-label>
+        <ngx-mat-file-input [formControl]="input.currentControl" [required]="input.required"
+          [placeholder]="input.label" [multiple]="asInputFile.multiple" [accept]="asInputFile.accept">
+        </ngx-mat-file-input>
+        <mat-error>
+          <ng-container *ngTemplateOutlet="errorsTemplate"></ng-container>
+        </mat-error>
+      </mat-form-field>
+    </div>
+
+    <div *ngSwitchCase="'zformArray'" class="arrayFieldContainer">
+      <mat-label>{{isArray ? input.label + ' - ' + fieldIndex  : input.label}}</mat-label>
+      <div *ngFor="let q of asArray.questions; let i=index">
+        <button mat-mini-fab color="warn" class="deleteRowBtn"
+        [disabled]="asArray.questions.length <= asArray.minItens"
+        (click)="removeControl(q.key)">
+          <mat-icon>delete</mat-icon>
+        </button>
+        <z-input-material [input]="q" [form]="convertArrayToGroup(arrayGroupForm)" [isArray]="true" [fieldIndex]="i + 1"></z-input-material>
+      </div>
+
+      <div role="group">
+        <button type="button" mat-raised-button [matBadge]="asArray.questions.length"
+        [disabled]="asArray.questions.length >= asArray.maxItens" color="accent" (click)="addControl()">
+          <mat-icon>add</mat-icon>
+          {{ 'lbl_arr_add_field' | zTranslate: {field: asArray.controlOptions.label} }}
+        </button>
+      </div>
+
+      <mat-error>
+        <ng-container *ngTemplateOutlet="errorsTemplate"></ng-container>
+      </mat-error>
+
+    </div>
 
   </div>
 

@@ -6,14 +6,19 @@ import {
   zCpfPattern,
   zIpPattern,
   zSelectValidator,
+  zTimePatternNoSeconds,
+  zTimePatternSeconds,
   zVehiclePlatePattern
 } from './validators';
-import { AbstractControl, AsyncValidatorFn, FormControl, FormGroup, ValidatorFn, Validators } from '@angular/forms';
+import { AbstractControl, AsyncValidatorFn, FormArray, FormControl, FormGroup, ValidatorFn, Validators } from '@angular/forms';
 import { Injectable } from '@angular/core';
 import {
   ZFormInputBase,
   ZFormInputText,
-  ZFormInputSelect
+  ZFormInputSelect,
+  ZFormInputTime,
+  ZFormInputArray,
+  ZInput
 } from './form-inputs';
 
 @Injectable({
@@ -72,17 +77,50 @@ export class ZFormService {
       }
     }
 
+    if (input.controlType === 'inputTime') {
+      if (!(input as ZFormInputTime).isSeconds) {
+        validators.push(Validators.pattern(zTimePatternSeconds));
+      } else {
+        validators.push(Validators.pattern(zTimePatternNoSeconds));
+      }
+    }
+
     if (input.controlType === 'inputSelect') {
       asyncValidators.push(zSelectValidator((input as ZFormInputSelect<any, any>)));
     }
 
-    const control = new FormControl({
-      value: input.value === undefined ? '' : input.value,
-      disabled: input.disabled
-    }, [...validators, ...input.validators], [...asyncValidators, ...input.asyncValidators]);
+    let control: AbstractControl;
 
-    input.didReceiveControl.next(control);
+    if (input.controlType === 'zformArray') {
+      const ctr = input as ZFormInputArray<any, ZFormInputBase<any>, ZInput<any>>;
+
+      const startRows = Math.max(ctr.startItens, (ctr.value || []).length);
+      // Precisa criar os validadores do Array
+      const controls = Array(startRows).fill(1).map((v, idx) => {
+
+        const newQ = new ctr.controlConstructor({
+          ...ctr.controlOptions,
+          value: (ctr.value || [])[idx] || ctr.controlOptions.value,
+          key: String(idx)
+        });
+        ctr.questions.push(newQ); // Guarda as questoes na memoria do ArrQuestion para uso posterior
+        const genControl = this.inputControl(newQ);
+        return genControl;
+      });
+
+      control = new FormArray(controls, [...validators, ...input.validators], [...asyncValidators, ...input.asyncValidators]);
+    } else {
+
+      control = new FormControl({
+        value: input.value === undefined ? '' : input.value,
+        disabled: input.disabled
+      }, [...validators, ...input.validators], [...asyncValidators, ...input.asyncValidators]);
+
+    }
+
+    input.didReceiveControl.next(control as FormControl);
 
     return control;
+
   }
 }
