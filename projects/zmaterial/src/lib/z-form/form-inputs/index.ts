@@ -6,3 +6,4 @@ export * from './z-form-input-time';
 export * from './z-form-input-textarea';
 export * from './z-form-input-file';
 export * from './z-form-array';
+export * from './z-form-input-number';

@@ -128,6 +128,22 @@
       </mat-form-field>
     </div>
 
+    <div *ngSwitchCase="'inputNumber'">
+
+      <mat-form-field  class="full-width" appearance="outline" [hintLabel]="input.hint">
+
+        <mat-label>{{isArray ? input.label + ' - ' + fieldIndex  : input.label}}</mat-label>
+        <input matInput [placeholder]="isArray ? input.label + ' - ' + fieldIndex  : input.label" [formControl]="input.currentControl" [name]="input.key" [readonly]
+          [id]="input.key" type="number" [required]="input.required" [min]="asNumber.min" [max]="asNumber.max"
+          [step]="asNumber.step">
+
+        <mat-error>
+          <ng-container *ngTemplateOutlet="errorsTemplate"></ng-container>
+        </mat-error>
+
+      </mat-form-field>
+    </div>
+
     <div *ngSwitchCase="'inputTextArea'">
       <mat-form-field  class="full-width" appearance="outline" [hintLabel]="input.hint">
 

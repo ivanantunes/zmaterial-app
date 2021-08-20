@@ -11,7 +11,8 @@ import {
   ZFormInputTextArea,
   ZFormInputFile,
   ZInput,
-  ZFormInputArray
+  ZFormInputArray,
+  ZFormInputNumber
 } from '../form-inputs';
 import { ZSearchResult } from '../interfaces';
 import { ZFormService } from '../z-form.service';
@@ -66,6 +67,7 @@ export class ZInputMaterialComponent implements OnInit {
   get asInputTime(): ZFormInputTime { return this.input as ZFormInputTime; }
   get asInputTextArea(): ZFormInputTextArea { return this.input as ZFormInputTextArea; }
   get asInputFile(): ZFormInputFile { return this.input as ZFormInputFile; }
+  get asNumber(): ZFormInputNumber { return this.input as ZFormInputNumber; }
 
   private setupArrayInput(ctr: AbstractControl): void {
     this.arrayGroupForm = ctr as FormArray;
