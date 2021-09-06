@@ -10,7 +10,7 @@
     "dist:patch": "npm run version:patch && npm run postversion && npm run build:prod && npm run publish",
     "dist:minor": "npm run version:minor && npm run postversion && npm run build:prod && npm run publish",
     "dist:major": "npm run version:major && npm run postversion && npm run build:prod && npm run publish",
-    "start": "ng serve",
+    "start": "npm run build:prod && npm i --save dist/zmaterial && ng serve",
     "build:app": "ng build",
     "build:prod": "ng build zmaterial --prod",
     "watch-mod": "ng build zmaterial --watch"
@@ -46,6 +46,7 @@
     "rxjs": "~6.6.0",
     "tslib": "^2.0.0",
     "xlsx": "^0.16.9",
+    "zmaterial": "file:dist/zmaterial",
     "zone.js": "~0.11.4"
   },
   "devDependencies": {

@@ -1,6 +1,6 @@
 import { map } from 'rxjs/operators';
-import { FormGroup } from '@angular/forms';
-import { Component, Input, OnInit, ViewChild } from '@angular/core';
+import { FormBuilder, FormGroup, FormArray, FormControl } from '@angular/forms';
+import { ChangeDetectorRef, Component, Input, OnInit, ViewChild } from '@angular/core';
 import { ZTranslateService } from '../services';
 import { ZModalService } from '../z-modal';
 import { ZReportSource } from './class';
@@ -23,21 +23,29 @@ export class ZReportBuilderComponent implements OnInit {
   // ? Data Input
   @Input() source: ZReportSource;
   @Input() screen: string;
+  @Input() checks: ZReportField[];
 
   // ? DOM
-  @ViewChild('fields') fields: MatSelectionList;
+  // @ViewChild('fields') fields: MatSelectionList;
 
   // ? Global
   public loading = false;
   public selectedTab = ReportBuilderTab.filter;
-  public metadataField: ZReportField[];
+  public metadata: ZReportMetadata;
+  public choicesArray: FormArray;
 
   // ? Form
   public formFilter: FormGroup = new FormGroup({});
+  public formGroupFields: FormGroup;
+
+  // ? Backup
+  private reportMetadataBackup: ZReportField[] = [];
 
   constructor(
     private modal: ZModalService,
-    private tService: ZTranslateService
+    private tService: ZTranslateService,
+    private fb: FormBuilder,
+    private cdRef: ChangeDetectorRef,
   ) {}
 
   ngOnInit(): void {
@@ -62,7 +70,21 @@ export class ZReportBuilderComponent implements OnInit {
 
     this.source.getMetadata(this.screen).subscribe((metadata) => {
       this.source.metadata = metadata;
-      this.metadataField = metadata.fields;
+      this.checks = metadata.fields;
+
+      this.formGroupFields = this.fb.group({
+        myChoices: new FormArray([])
+      });
+
+      this.choicesArray = this.formGroupFields.get('myChoices') as FormArray;
+
+      this.checks.forEach((choice) => {
+        choice.checked = choice.required;
+        choice.grouped = false;
+        this.choicesArray.push(new FormControl(choice));
+      });
+
+      metadata.fields.forEach((f) => this.reportMetadataBackup.push(f));
 
       this.loading = false;
     }, (error) => {
@@ -88,13 +110,17 @@ export class ZReportBuilderComponent implements OnInit {
   }
 
   public choiceFields(): void {
-    const arrFields = this.fields.selectedOptions.selected.map((f) => f.value);
+
+    const checkedOnes = this.checks.filter((f) => f.checked);
+
+
+    // const arrFields = this.fields.selectedOptions.selected.map((f) => f.value);
 
     this.source.getFilteredReportData(this.screen, this.formFilter.value).pipe(
       map((data) => data.map((row) => {
         const newObject: any = {};
 
-        arrFields.forEach((f) => {
+        checkedOnes.forEach((f) => {
 
           newObject[f.key] = row[f.key];
 
@@ -120,7 +146,7 @@ export class ZReportBuilderComponent implements OnInit {
         };
 
       });
-      this.source.metadata.fields = arrFields;
+      this.source.metadata.fields = checkedOnes;
 
       this.selectedTab = ReportBuilderTab.report;
 
@@ -134,6 +160,81 @@ export class ZReportBuilderComponent implements OnInit {
 
     });
 
+  }
+
+  public onSendFields(): void {
+
+    if (!this.screen) {
+      return;
+    }
+
+    if (this.choicesArray.value.length < 2) {
+      return;
+    }
+
+    this.selectedTab = ReportBuilderTab.report;
+  }
+
+  public onGroupChange(event): void {
+    const campo = event.source.value;
+    const campos = this.checks.filter((f) => f !== campo);
+
+    if (!campo.grouped) {
+      // * No no. just one at a time
+      campos.forEach((c) => (c.grouped = false));
+    }
+
+    const index = this.checks.indexOf(campo);
+    campo.grouped = !campo.grouped;
+    this.checks[index] = campo;
+  }
+
+  public onSimplifiedChange(event): void {
+    if (event.checked) {
+      this.checks.forEach((c) => (c.grouped = false));
+    }
+  }
+
+  public getCheckedFields(): boolean {
+    return this.checks.filter((c) => c.checked).length < 2;
+  }
+
+  public onCheckChange(event): void {
+
+    const campo = event.source.value;
+
+    const index = this.checks.indexOf(campo);
+    campo.checked = !campo.checked;
+    campo.grouped = false;
+    this.checks[index] = campo;
+
+  }
+
+  private generateFieldsArray(choices: ZReportField[], reportMetadata: ZReportField[]): boolean {
+    const fieldsArray = [];
+
+    choices.forEach((c) => {
+      reportMetadata.forEach((f) => {
+        if (c.key === f.key) {
+          fieldsArray.push(c);
+        }
+      });
+    });
+
+    if (fieldsArray.length < 2) {
+      return false;
+    }
+
+    /* Ordenar os campos do relatório */
+    fieldsArray.sort((a: ZReportField, b: ZReportField) => {
+      if (a.order < b.order) { return -1; }
+      if (a.order > b.order) { return 1; }
+    });
+
+    this.source.metadata.fields = fieldsArray;
+    this.metadata.fields = fieldsArray;
+
+    return true;
   }
 
 }

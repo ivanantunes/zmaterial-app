@@ -50,6 +50,7 @@ import { MatTableModule } from '@angular/material/table';
 import { MatStepperModule } from '@angular/material/stepper';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatBadgeModule } from '@angular/material/badge';
+import { MatCheckboxModule } from '@angular/material/checkbox';
 
 @NgModule({
   declarations: [
@@ -85,6 +86,7 @@ import { MatBadgeModule } from '@angular/material/badge';
     MatStepperModule,
     MatTabsModule,
     MatBadgeModule,
+    MatCheckboxModule,
 
     // Forms
     ReactiveFormsModule,
@@ -121,6 +123,7 @@ import { MatBadgeModule } from '@angular/material/badge';
     MatStepperModule,
     MatTabsModule,
     MatBadgeModule,
+    MatCheckboxModule,
 
     // Forms
     ReactiveFormsModule,

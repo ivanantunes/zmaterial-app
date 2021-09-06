@@ -11,9 +11,11 @@ export const zReportBuilderTranslate: ZLanguageData = {
     lbl_column: 'Campos',
     lbl_report: 'Relatório',
     lbl_source_undefined: 'Source Não Definido.',
+    lbl_field_group: 'Agrupar',
 
     btn_choice: 'Escolher',
     btn_clear_choices: 'Limpar Escolhas',
+
 
     metadata_not_found: 'Metadata Não Definido.',
     form_not_found: 'Formulário Não Definido.',
@@ -31,6 +33,7 @@ export const zReportBuilderTranslate: ZLanguageData = {
     lbl_filter: 'Filter',
     lbl_column: 'Fields',
     lbl_report: 'Report',
+    lbl_field_group: 'Agroup',
     lbl_source_undefined: 'Source Not Defined.',
 
     btn_choice: 'Choice',

@@ -27,7 +27,7 @@ export class AppComponent {
       category: 'Relatório',
       icon: 'table_chart',
       itens: [
-        { label: 'Logs', link: 'report/logs' }
+        { label: 'Logs', link: 'report/logs' },
       ]
     },
     {
