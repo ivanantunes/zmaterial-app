@@ -12,6 +12,7 @@ export const zReportBuilderTranslate: ZLanguageData = {
     lbl_report: 'Relatório',
     lbl_source_undefined: 'Source Não Definido.',
     lbl_field_group: 'Agrupar',
+    lbl_info_group: 'Apenas um Campo Pode ser Agrupado.',
 
     btn_choice: 'Escolher',
     btn_clear_choices: 'Limpar Escolhas',
@@ -35,6 +36,8 @@ export const zReportBuilderTranslate: ZLanguageData = {
     lbl_report: 'Report',
     lbl_field_group: 'Agroup',
     lbl_source_undefined: 'Source Not Defined.',
+    lbl_info_group: 'Only One Field Can Be Grouped.',
+
 
     btn_choice: 'Choice',
     btn_clear_choices : 'Clear Choices',

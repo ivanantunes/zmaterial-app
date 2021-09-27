@@ -7,6 +7,8 @@ import { of } from 'rxjs';
 import { ZModalService } from '../../z-modal';
 import { ZReportDefinition } from '../interfaces';
 import { zPdfGenerator, zXlsxGenerator, zCsvGenerator } from '../functions';
+import { ZReportField } from '../../z-report-builder/interfaces';
+import { ZReportSource } from '../../z-report-builder/class/zReportSource';
 
 @Component({
   selector: 'z-report-material',
@@ -16,9 +18,15 @@ import { zPdfGenerator, zXlsxGenerator, zCsvGenerator } from '../functions';
 export class ZReportMaterialComponent implements OnInit {
 
   @Input() reportProvider: ZReportProvider<any>;
+  @Input() reportSource: ZReportSource;
+  @Input() checks: ZReportField[];
 
   public dataSource: any[];
   public dateGenerateReport = new Date().toLocaleString();
+  public filteringByLabel: string;
+  public filteringBy: string;
+  public groupedField: ZReportField[] = [];
+  public actuallyDataSource: any[] = [];
 
   constructor(private modal: ZModalService, private tService: ZTranslateService) { }
 
@@ -57,7 +65,32 @@ export class ZReportMaterialComponent implements OnInit {
         return of([]);
       })
     ).subscribe((data) => {
+      const isGrouped = this.checks.find((f) => f.grouped);
+
       this.dataSource = data;
+      this.groupedField = this.checks.filter((f) => f.grouped);
+      this.filteringByLabel = isGrouped ? isGrouped.label : '';
+
+      const segregatedData = [];
+
+      if (this.groupedField.length === 1) {
+
+        this.groupedField.forEach((f) => {
+          const obj = this.groupBy2(data, f.key);
+
+          Object.keys(obj).forEach(key => {
+            const array: any[] = Object.keys(obj[key]).map(item => obj[key][item]);
+            segregatedData.push(array);
+          });
+        });
+
+        this.filteringBy = this.groupedField[0].key;
+        this.filteringByLabel = this.groupedField[0].label;
+      }
+
+      this.actuallyDataSource = segregatedData;
+
+
     });
 
   }
@@ -72,5 +105,15 @@ export class ZReportMaterialComponent implements OnInit {
 
   public exportCSV(): void {
     zCsvGenerator(this.getReportConfig, this.getReportDefinition, this.dataSource, this.tService);
+  }
+
+  public groupBy2(xs: any[], prop: string): any {
+    const grouped = {};
+    for (const x of xs) {
+      const p = x[prop];
+      if (!grouped[p]) { grouped[p] = []; }
+      grouped[p].push(x);
+    }
+    return grouped;
   }
 }

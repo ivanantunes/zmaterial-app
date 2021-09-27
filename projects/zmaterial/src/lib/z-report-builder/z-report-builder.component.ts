@@ -1,10 +1,9 @@
 import { map } from 'rxjs/operators';
 import { FormBuilder, FormGroup, FormArray, FormControl } from '@angular/forms';
-import { ChangeDetectorRef, Component, Input, OnInit, ViewChild } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { ZTranslateService } from '../services';
 import { ZModalService } from '../z-modal';
 import { ZReportSource } from './class';
-import { MatSelectionList } from '@angular/material/list';
 import { ZReportField, ZReportMetadata } from './interfaces';
 
 enum ReportBuilderTab {
@@ -45,7 +44,6 @@ export class ZReportBuilderComponent implements OnInit {
     private modal: ZModalService,
     private tService: ZTranslateService,
     private fb: FormBuilder,
-    private cdRef: ChangeDetectorRef,
   ) {}
 
   ngOnInit(): void {

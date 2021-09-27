@@ -19,7 +19,7 @@ export class AppComponent {
       category: 'Cadastro',
       icon: 'add',
       itens: [
-        { label: 'Usuário', link: 'register/user' },
+        { label: 'Usuário', link: 'register/user', icon: 'home' },
         { label: 'Curso', link: 'register/course' }
       ]
     },

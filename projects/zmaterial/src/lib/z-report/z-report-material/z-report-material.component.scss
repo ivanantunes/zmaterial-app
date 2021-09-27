@@ -1,58 +1,69 @@
-.container-main {
+.loading-shade {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.15);
+  z-index: 200;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.container-master {
+  display: block;
+  width: 98%;
+  margin: 15px auto;
+}
+
+.container-filters {
+  display: block;
+  width: 98%;
+  margin: 15px auto;
+}
+
+.container-filter-text {
+  display: block;
+  width: 100%;
+}
+
+.titleReport {
+  text-align: center;
   margin: 10px;
 }
 
-.report-logo {
+.titleCabecalho {
+  text-align: center;
+  font-size: 30px;
+  margin-bottom: 1%;
+}
+
+.textCabecalho {
+  font-size: 18px;
+  margin-bottom: 1%;
+}
+
+.btnCabecalho {
+  margin: 0% 1% 1% 0%;
+}
+
+.filterText {
+  margin-bottom: 5px;
+  float: left;
+  width: 100%;
+  padding: 0.5%;
+}
+
+.companyLogo {
+  width: 200px;
+  height: 150px;
   display: block;
   margin-right: 1%;
   float: left;
 }
 
-.report-title {
-  font-size: 18px;
-  margin-bottom: 1%;
-}
-
-.report-title-small {
-  font-size: 16px;
-  margin-bottom: 1%;
-}
-
-.report-subtile {
-  font-size: 14px;
-  margin-bottom: 1%;
-}
-
-.text-center {
-  text-align: center;
-}
-
-.margin-top {
-  margin-top: 10px;
-}
-
-.clear-both {
-  clear: both;
-}
-
-.report-actions {
-  display: flex;
-  justify-content: center;
-}
-
-.report-actions-button {
-  margin: 10px;
-}
-
-.report-filter-text {
-  margin-bottom: 5px;
-  float: left;
-  width: 50%;
-  padding: 0.5%;
-  word-wrap: auto;
-}
-
-.report-table {
+.table-cantainer {
   width: inherit;
   margin: auto;
   padding: 5px;
@@ -60,16 +71,28 @@
   background-color: rgb(242, 242, 242);
 }
 
-.report-title {
+.table-header-container {
+  padding: 0.5%;
+  margin: auto;
+}
+
+.table-header-title {
   text-align: center;
   color: black;
   font-size: 15px;
   margin: auto;
   width: auto;
   padding: 10px 0px;
+  background: rgba(185, 185, 185, 0.5);
 }
 
-.report-rows-text {
+.table-rows-container {
+  padding: 1%;
+  background-color: white;
+  margin: auto;
+}
+
+.table-rows-text {
   font-size: 13px;
   color: black;
   text-align: center;
@@ -78,35 +101,157 @@
   display: table-cell;
 }
 
-.report-rows {
-  padding: 1%;
-  background-color: white;
-  margin: auto;
-}
-
-.full-width {
+.table-content {
+  margin-bottom: 2.4rem;
   width: 100%;
+  border: 1px solid rgba(0, 0, 0, 0.13);
+  border-radius: 5px;
+
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
 }
 
-@media(max-width: 800px) {
-  .report-logo {
+#filtering-container {
+  display: inline;
+}
+
+#filtering-by-first {
+  left: 0;
+  background-color: rgb(242, 242, 242);
+  border-radius: 5px;
+  display: inline-block;
+  font-size: small;
+  text-align: center;
+  width: 32.5%;
+  padding: 0.4rem;
+  // margin: 0.2rem auto 0.4rem auto;
+  margin: 0.2rem;
+}
+
+#filtering-by-first-center {
+  background-color: rgb(242, 242, 242);
+
+  border-radius: 5px;
+
+  text-align: center;
+
+  font-size: small;
+
+  width: 40%;
+  padding: 0.4rem;
+  margin: 0.2rem auto 0.4rem auto;
+}
+
+#filtering-by {
+  text-align: center;
+  margin-bottom: 0.8rem;
+  margin-top: 0.6rem;
+  font-size: small;
+}
+
+.empty-state {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-top: 35px;
+  gap: 15px;
+}
+
+.empty-state p {
+  font-size: medium;
+  font-weight: bold;
+  color: #ccc;
+}
+
+.empty-state mat-icon {
+  display: contents;
+  font-size: 96px;
+  color: #ccc;
+}
+
+/* MOBILE */
+.textCabecalhoMobile {
+  display: none;
+}
+
+.textCabecalhoMobileDesc {
+  display: none;
+}
+
+.see-more-btn {
+  display: inline;
+  cursor: pointer;
+  border-radius: 2px;
+  transition: 0.3s;
+}
+
+.see-more-btn:hover {
+  background-color: lightgray;
+}
+
+.entire-screen-spinner {
+  position: fixed;
+  top: 0vh;
+  left: 0vh;
+  width: 100%;
+  height: 100vh;
+  z-index: 999; // I have the high ground!
+  background: rgba(0, 0, 0, 0.15);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@media (max-width: 1000px) {
+  .btnCabecalho {
+    width: 22%;
+  }
+
+  #filtering-by-first {
+    width: 49%;
+  }
+}
+
+@media (max-width: 890px) {
+  #filtering-by-first {
+    width: 48.9%;
+  }
+}
+
+@media (max-width: 815px) {
+  #filtering-by-first {
+    width: 98%;
+  }
+}
+
+@media (max-width: 850px) {
+  .companyLogo {
     margin: auto;
-    margin-bottom: 2%;
-    margin-right: auto;
     float: none;
   }
-
-  .report-actions {
-    margin: auto;
-    display: grid;
+  .textCabecalho {
+    display: none;
   }
 
-  .report-filter-text {
-    float: none;
-    width: 100%;
-  }
-
-  #filters-report-title {
+  .textCabecalhoMobile {
+    display: block;
+    margin: 5px auto;
     text-align: center;
+  }
+
+  .textCabecalhoMobileDesc {
+    display: block;
+    margin: 10px auto;
+    text-align: center;
+  }
+
+  .btnCabecalho {
+    display: block;
+    margin: 2% auto;
+    width: auto;
+  }
+
+  .table-content {
+    margin-right: 1%;
   }
 }

@@ -30,6 +30,8 @@
 
       <mat-card-header>
         <mat-card-title>{{'fields_report' | zTranslate}}</mat-card-title>
+        <span class="spacer"></span>
+        <mat-icon [matTooltip]="'lbl_info_group' | zTranslate">info</mat-icon>
       </mat-card-header>
 
       <mat-card-content>
@@ -58,20 +60,11 @@
           </div>
         </form>
 
-        <!-- <mat-selection-list #fields>
-
-          <mat-list-option *ngFor="let field of metadataField" [value]="field" [selected]="field.required">
-            {{field.label}}
-          </mat-list-option>
-
-        </mat-selection-list> -->
-
       </mat-card-content>
 
       <mat-card-actions>
 
         <button mat-raised-button color="primary" (click)="choiceFields()">{{'btn_choice' | zTranslate}}</button>
-        <!-- <button mat-raised-button color="accent" (click)="fields.deselectAll()">{{'btn_clear_choices' | zTranslate}}</button> -->
 
       </mat-card-actions>
 
@@ -86,7 +79,7 @@
       {{'lbl_report' | zTranslate}}
     </ng-template>
 
-    <z-report-material *ngIf="selectedTab === 2" [reportProvider]="source"></z-report-material>
+    <z-report-material *ngIf="selectedTab === 2" [reportProvider]="source" [reportSource]="source" [checks]="checks"></z-report-material>
 
   </mat-tab>
 
