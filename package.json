@@ -13,7 +13,8 @@
     "start": "npm run build:prod && npm i --save dist/zmaterial && ng serve",
     "build:app": "ng build",
     "build:prod": "ng build zmaterial --prod",
-    "watch-mod": "ng build zmaterial --watch"
+    "watch-mod": "ng build zmaterial --watch",
+    "test:local": "npm run build:prod && cd dist/zmaterial/ && npm pack && cd .. && cd .."
   },
   "private": true,
   "dependencies": {

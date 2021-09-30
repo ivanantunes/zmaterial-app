@@ -1,97 +1,139 @@
+import { ZModalService } from '../../z-modal/z-modal.service';
 import { ZTranslateService } from './../../services/z-translate.service';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
-import { Component, Input, OnInit, Output } from '@angular/core';
-import { ActivationStart, Router } from '@angular/router';
-import { Observable, Subject } from 'rxjs';
+import { Component, Input, OnDestroy, OnInit, Output } from '@angular/core';
+import { ActivationStart, NavigationEnd, Router } from '@angular/router';
+import { Observable, Subject, Subscription } from 'rxjs';
 import { filter, map } from 'rxjs/operators';
 import { ZMenuProfile, ZMenuItems } from '../interfaces';
+import { ZMenuProvider } from './zMenuProvider';
 
 @Component({
-    selector: 'z-menu-material',
-    templateUrl: './z-menu-material.component.html',
-    styleUrls: ['./z-menu-material.component.scss']
+  selector: 'z-menu-material',
+  templateUrl: './z-menu-material.component.html',
+  styleUrls: ['./z-menu-material.component.scss']
 })
 
-export class ZMenuMaterialComponent implements OnInit {
+export class ZMenuMaterialComponent implements OnInit, OnDestroy {
 
-    // ? Input - Screen Infos
+  // ? Input - Screen Infos
 
-    /**
-     * Define title project
-     */
-    @Input() titleProject: string;
+  /**
+   * Define title project
+   */
+  @Input() titleProject: string;
 
-    /**
-     * Define logo project
-     */
-    @Input() logoProject: string;
+  /**
+   * Define logo project
+   */
+  @Input() logoProject: string;
 
-    /**
-     * Define profile items
-     */
-    @Input() profile: ZMenuProfile;
+  /**
+   * Define menu Provider
+   */
+  @Input() menuProvider: ZMenuProvider;
 
-    /**
-     * Define menu items
-     */
-    @Input() menuItems: ZMenuItems[];
+  /**
+   * Define profile items
+   */
+  public profile: ZMenuProfile;
 
-    // ? Input - Show Itens
+  /**
+   * Define menu items
+   */
+  public menuItems: ZMenuItems[];
 
-    /**
-     * If show button logout or not.
-     */
-    @Input() showLogout: boolean;
+  /**
+   * Define Loading
+   */
+  public isLoading = false;
 
-    // ? Output - Event Data
+  // ? Input - Show Itens
 
-    /**
-     * Event click logout.
-     */
-    @Output() logout = new Subject<boolean>();
+  /**
+   * If show button logout or not.
+   */
+  @Input() showLogout: boolean;
 
-    // ? Global
+  /**
+   * Is Authenticate
+   */
+  @Input() isAuth: boolean;
 
-    /**
-     * Defines whether it is a mobile device
-     */
-    public isHandset: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset).pipe(
-        map(result => result.matches)
-    );
+  // ? Output - Event Data
 
-    /**
-     * Hide sidebar of screen
-     */
-    public hideSidebar = false;
+  /**
+   * Event click logout.
+   */
+  @Output() logout = new Subject<boolean>();
 
-    constructor(
-        private breakpointObserver: BreakpointObserver,
-        private router: Router,
-        private tService: ZTranslateService
-    ) {}
+  // ? Global
 
-    ngOnInit(): void {
+  /**
+   * Defines whether it is a mobile device
+   */
+  public isHandset: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset).pipe(
+    map(result => result.matches)
+  );
 
-      this.router.events.pipe(
+  /**
+   * Hide sidebar of screen
+   */
+  public hideSidebar = false;
 
-        filter((event) => event instanceof ActivationStart)
+  private subscription = new Subscription();
 
-      ).subscribe((event: ActivationStart) => {
+  constructor(
+    private breakpointObserver: BreakpointObserver,
+    private router: Router,
+    private tService: ZTranslateService,
+    private modal: ZModalService
+  ) { }
 
-        if (event.snapshot.data.hideSideBar) {
-          this.hideSidebar = event.snapshot.data.hideSideBar;
-        }
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe();
+  }
 
-      });
+  ngOnInit(): void {
 
-    }
+    this.subscription.add(this.menuProvider.profile.subscribe((profile) => {
+      this.profile = profile;
+    }));
 
-    public changeLang(lng: string): void {
-      this.tService.setCurrentLanguage(lng).subscribe(() => {
-        window.location.reload();
-      }, (err) => {
-        console.log('Falha ao Alterar Idioma: ', err);
-      });
-    }
+    this.subscription.add(this.router.events.pipe(
+      filter((rs): rs is NavigationEnd => rs instanceof NavigationEnd)
+    ).subscribe(event => {
+      if ((event.id === 1 || event.id === 2) && event.url === event.urlAfterRedirects) {
+        this.isLoading = true;
+        this.subscription.add(this.menuProvider.menus.subscribe((menu) => {
+          this.menuItems = menu;
+          this.isLoading = false;
+        }, (err) => {
+          console.log('Falha ao Carregar Menu: ', err);
+          this.isLoading = false;
+        }));
+      }
+    }));
 
+    this.router.events.pipe(
+
+      filter((event) => event instanceof ActivationStart)
+
+    ).subscribe((event: ActivationStart) => {
+
+      if (event.snapshot.data.hideSideBar) {
+        this.hideSidebar = event.snapshot.data.hideSideBar;
+      }
+
+    });
+
+  }
+
+  public changeLang(lng: string): void {
+    this.tService.setCurrentLanguage(lng).subscribe(() => {
+      window.location.reload();
+    }, (err) => {
+      console.log('Falha ao Alterar Idioma: ', err);
+    });
+  }
 }
