@@ -119,6 +119,13 @@
           <mat-icon>language</mat-icon>
         </button>
 
+        <!-- ? Button Logout -->
+        <button mat-icon-button *ngIf="showLogout && isAuth" (click)="logout.next(true)" [matTooltip]="'btn_exit' | zTranslate"
+          matTooltipPosition="below">
+          <mat-icon>logout</mat-icon>
+        </button>
+
+
       </mat-toolbar-row>
 
     </mat-toolbar>
