@@ -2,6 +2,7 @@ import { ZTranslateService } from '../../services';
 import * as jsPDF from 'jspdf';
 import 'jspdf-autotable';
 import { ZReportConfig, ZReportDefinition } from '../interfaces';
+import { ZReportField } from '../../z-report-builder';
 
 function pdfHeaderGenerator(author: string, title: string): any {
   return [
@@ -159,7 +160,7 @@ function pdfCreatedAndTotalRows(date: Date, totalItems: number, tService: ZTrans
 }
 
 export function zPdfGenerator(
-  config: ZReportConfig, definition: ZReportDefinition<any>[], data: any[], tService: ZTranslateService
+  config: ZReportConfig, definition: ZReportDefinition<any>[], data: any[], tService: ZTranslateService, reportField: ZReportField[]
 ): void {
 
   // TODO: Talvez precise colocar os filtros no pdf
@@ -242,12 +243,39 @@ export function zPdfGenerator(
 
   // ? PDF Table
 
-  (documentPdf as any).autoTable({
-    ...pdfTableStyle(config),
-    valign: 'middle',
-    head: [[...definition.map((f) => f.header)]],
-    body: [...data.map((rows) => definition.map((f) => rows[f.key]))]
-  });
+  const checks = reportField.filter((f) => f.grouped);
+
+
+  if (checks.length >= 1) {
+
+    checks.forEach((f) => {
+
+      const obj = groupBy2(data, f.key);
+
+      Object.keys(obj).forEach((key) => {
+
+        const array: any[] = Object.keys(obj[key]).map(item => obj[key][item]);
+
+
+        (documentPdf as any).autoTable({
+          ...pdfTableStyle(config),
+          valign: 'middle',
+          head: [[...definition.map((z) => z.header)]],
+          body: [...array.map((rows) => definition.map((z) => rows[z.key]))],
+          foot: [[`Total de Registros`, `${Object.keys(obj[key]).length}`]]
+        });
+
+      });
+    });
+
+  } else {
+    (documentPdf as any).autoTable({
+      ...pdfTableStyle(config),
+      valign: 'middle',
+      head: [[...definition.map((f) => f.header)]],
+      body: [...data.map((rows) => definition.map((f) => rows[f.key]))]
+    });
+  }
 
   // ? Count Page PDF
 
@@ -273,4 +301,14 @@ export function zPdfGenerator(
   documentPdf.save(
     `${tService.t('lbl_report')}_${currentDate.toLocaleString()}.pdf`.replace(/\//g, '_')
   );
+}
+
+function groupBy2(xs: any[], prop: string): any {
+  const grouped = {};
+  for (const x of xs) {
+    const p = x[prop];
+    if (!grouped[p]) { grouped[p] = []; }
+    grouped[p].push(x);
+  }
+  return grouped;
 }

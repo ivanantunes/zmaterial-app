@@ -96,7 +96,7 @@ export class ZReportMaterialComponent implements OnInit {
   }
 
   public exportPDF(): void {
-    zPdfGenerator(this.getReportConfig, this.getReportDefinition, this.dataSource, this.tService);
+    zPdfGenerator(this.getReportConfig, this.getReportDefinition, this.dataSource, this.tService, this.checks);
   }
 
   public exportXLSX(): void {

@@ -2,9 +2,8 @@
 [titleProject]="'zMaterial'"
 [logoProject]="'assets/no-profile.jpeg'"
 [showLogout]="true"
-[profile]="currentProfile"
 (logout)="logout($event)"
-[menuItems]="currentMenus"
+[menuProvider]="this"
 >
   <router-outlet></router-outlet>
 </z-menu-material>
