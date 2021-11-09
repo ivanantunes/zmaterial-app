@@ -1,82 +1,110 @@
-<mat-card class="container-main" *ngIf="getReportConfig else error">
+<div class="container-master">
+  <mat-card class="container-filters">
+    <!-- LOGO -->
+    <div style="width: 100%; display: block;">
+      <img [src]="getReportConfig.image.image" *ngIf="getReportConfig.image" class="companyLogo">
+      <div style="display: block;">
 
-  <!-- ? Container Repeort Logo -->
-  <div *ngIf="getReportConfig.image">
-    <img [src]="getReportConfig.image.image" width="150px" height="150px" class="report-logo">
-  </div>
+        <h1 class="titleCabecalho">{{getReportConfig.title}}</h1>
 
-  <!-- ? Container Report Header -->
-  <div>
+        <p class="textCabecalho"><strong>{{'lbl_data_time_create' | zTranslate}}:
+          </strong>{{dateGenerateReport}}
+        </p>
 
-    <h1 class="report-title text-center">{{getReportConfig.title}} - {{getReportConfig.reportTitle}}</h1>
+        <p class="textCabecalho"><strong>{{'lbl_total_records' | zTranslate}}</strong>{{dataSource.length}}</p>
 
-    <p class="report-subtile">
-      <strong>{{'lbl_data_time_create' | zTranslate}} </strong>
-      {{dateGenerateReport}}
-    </p>
+        <!-- MOBILE CABECALHO -->
 
-    <p class="report-subtile">
-      <strong>{{'lbl_total_records' | zTranslate}} </strong>
-      {{dataSource.length}}
-    </p>
+        <h4 class="textCabecalhoMobile">{{'lbl_data_time_create' | zTranslate}}</h4>
+        <p class="textCabecalhoMobileDesc">{{dateGenerateReport}}</p>
 
-    <!-- ? Container Report Actions -->
+        <h4 class="textCabecalhoMobile">{{'lbl_total_records' | zTranslate}}</h4>
+        <p class="textCabecalhoMobileDesc">{{dataSource.length}}</p>
 
-    <div class="report-actions" *ngIf="getReportConfig.actions">
 
-      <button mat-raised-button color="accent" (click)="exportCSV()" *ngIf="getReportConfig.actions.csv" class="report-actions-button">
-        {{'btn_export_file' | zTranslate}} .CSV <mat-icon>text_snippet</mat-icon>
-      </button>
-      <button mat-raised-button color="accent" (click)="exportPDF()"  *ngIf="getReportConfig.actions.pdf" class="report-actions-button">
-        {{'btn_export_file' | zTranslate}} .PDF <mat-icon>description</mat-icon>
-      </button>
-      <button mat-raised-button color="accent" (click)="exportXLSX()" *ngIf="getReportConfig.actions.xlsx" class="report-actions-button">
-        {{'btn_export_file' | zTranslate}} .XLSX <mat-icon>table_chart</mat-icon>
-      </button>
+        <button mat-raised-button (click)="exportCSV()" color="accent" class="btnCabecalho" *ngIf="getReportConfig.actions.csv">
+          <mat-icon>attach_file</mat-icon> {{'btn_export_file' | zTranslate}} CSV
+        </button>
+        <button mat-raised-button (click)="exportPDF()" color="accent" class="btnCabecalho" *ngIf="getReportConfig.actions.pdf">
+          <mat-icon>insert_drive_file</mat-icon> {{'btn_export_file' | zTranslate}} PDF
+        </button>
+        <button mat-raised-button (click)="exportXLSX()" color="accent" class="btnCabecalho" *ngIf="getReportConfig.actions.xlsx">
+          <mat-icon>table_chart</mat-icon> {{'btn_export_file' | zTranslate}} XLSX
+        </button>
+
+      </div>
+
+      <!-- LIMPA FLOAT -->
+      <div style="clear: both;"></div>
 
     </div>
 
-    <div class="clear-both"></div>
+    <mat-card-content>
+      <!-- TITULO DO RELATORIO -->
+      <h2 class="titleReport">{{getReportConfig.reportTitle}}</h2>
 
-  </div>
+      <!-- FILTROS -->
+      <div *ngIf="getReportConfig.filters && getReportConfig.filters.length !== 0">
+        <div *ngFor="let filter of getReportConfig.filters" class="container-filter-text">
+          <p class="filterText"><strong>{{filter.title}}:</strong> {{filter.value}}</p>
+        </div>
+      </div>
 
-  <!-- ? Container Report Filters -->
-  <div *ngIf="getReportConfig.filters.length > 0">
+      <div style="padding-left: 0.5%;" *ngIf="filteringByLabel">
+        <p><strong>{{'lbl_grouped_field' | zTranslate}}</strong>: {{filteringByLabel}}</p>
+      </div>
+    </mat-card-content>
 
-    <h2 class="margin-top" id="filters-report-title">{{'lbl_filteres_report' | zTranslate}}</h2>
+    <!-- LIMPA FLOAT -->
+    <div style="clear: both;"></div>
 
-    <div *ngFor="let filter of getReportConfig.filters">
-      <p class="report-filter-text"><strong>{{filter.title}}:</strong> {{filter.value}}</p>
-    </div>
+    <ng-container *ngIf="dataSource.length === 0">
+      <div class="empty-state">
+        <mat-icon>content_paste_off</mat-icon>
+        <p>{{ 'lbl_empty' | zTranslate }}</p>
+      </div>
+    </ng-container>
 
-    <div class="clear-both"></div>
+    <!-- TABELA -->
 
-  </div>
+    <ng-container *ngIf="groupedField.length === 1 && dataSource.length > 0">
+      <div class="table-content" *ngFor="let source of actuallyDataSource">
 
-  <!-- ? Container Report -->
+        <p id="filtering-by">{{'lbl_total_of' | zTranslate}} '<strong>{{source[0][filteringBy]}}</strong>': {{source.length}}</p>
 
-  <div class="full-width">
+        <table mat-table class="table-cantainer" [dataSource]="source">
 
-    <table mat-table class="report-table" [dataSource]="dataSource">
+          <ng-container *ngFor="let column of getReportDefinition" [matColumnDef]="column.key">
+            <!-- CABEÇALHO TABELA -->
+            <th class="table-header-title"  *matHeaderCellDef>{{column.header}}</th>
 
-      <ng-container *ngFor="let column of getReportDefinition" [matColumnDef]="column.key">
+            <!-- LINHAS TABELA -->
+            <td class="table-rows-text" mat-cell *matCellDef="let row">{{ column.cell(row) }}</td>
 
-        <!-- Header Table -->
-        <th class="report-title"  *matHeaderCellDef>{{column.header}}</th>
+          </ng-container>
 
-        <!-- Rows Table -->
-        <td class="report-rows-text" mat-cell *matCellDef="let row">{{ column.cell(row) }}</td>
+          <tr mat-header-row *matHeaderRowDef="getReportColumns; sticky: true"></tr>
+          <tr mat-row *matRowDef="let row; columns: getReportColumns;" class="table-rows-container"></tr>
+        </table>
+      </div>
+    </ng-container>
 
-      </ng-container>
 
-      <tr mat-header-row *matHeaderRowDef="getReportColumns; sticky: true"></tr>
-      <tr mat-row *matRowDef="let row; columns: getReportColumns;" class="report-rows"></tr>
-    </table>
+    <ng-container *ngIf="groupedField.length === 0 && dataSource.length > 0">
+      <table mat-table class="table-cantainer" [dataSource]="dataSource">
 
-  </div>
+        <ng-container *ngFor="let column of getReportDefinition" [matColumnDef]="column.key">
+          <!-- CABEÇALHO TABELA -->
+          <th class="table-header-title"  *matHeaderCellDef>{{column.header}}</th>
 
-</mat-card>
+          <!-- LINHAS TABELA -->
+          <td class="table-rows-text" mat-cell *matCellDef="let row">{{ column.cell(row) }}</td>
 
-<ng-template #error>
-  <p>{{'lbl_not_found_config_report' | zTranslate}}</p>
-</ng-template>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="getReportColumns; sticky: true"></tr>
+        <tr mat-row *matRowDef="let row; columns: getReportColumns;" class="table-rows-container"></tr>
+      </table>
+    </ng-container>
+  </mat-card>
+</div>

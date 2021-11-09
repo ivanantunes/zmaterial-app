@@ -2,7 +2,7 @@ import { ZFormInputBase } from './../form-inputs';
 import { FormGroup } from '@angular/forms';
 import { Subject } from 'rxjs';
 import { ZFormService } from './../z-form.service';
-import { Component, Input, OnInit, Output } from '@angular/core';
+import { Component, ContentChild, ElementRef, Input, OnInit, Output, TemplateRef } from '@angular/core';
 import { ZFormProvider } from '../providers';
 
 @Component({
@@ -22,6 +22,8 @@ export class ZFormMaterialComponent implements OnInit {
 
   @Output() submitValue = new Subject<any>();
   @Output() formReady = new Subject<FormGroup>();
+
+  @ContentChild('extraActions') extraActions: TemplateRef<ElementRef>;
 
   public formInputs: ZFormInputBase<any>[] = [];
   public defaultValues: any = {};

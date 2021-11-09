@@ -18,28 +18,35 @@ export const MetadataExemplo: ZReportMetadata = {
       label: 'Posição',
       required: true,
       type: 'string',
-      order: 1
+      order: 1,
+      groupable: true,
     },
     {
       key: 'name',
       label: 'Nome',
       required: true,
       type: 'string',
-      order: 2
+      order: 2,
+      groupable: true,
+
     },
     {
       key: 'weight',
       label: 'Peso',
       required: true,
       type: 'string',
-      order: 3
+      order: 3,
+      groupable: true,
+
     },
     {
       key: 'symbol',
       label: 'Simbulo',
       required: true,
       type: 'string',
-      order: 4
+      order: 4,
+      groupable: true,
+
     }
   ],
   form: {

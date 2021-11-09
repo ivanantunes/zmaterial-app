@@ -9,11 +9,12 @@ export interface ZReportField {
     fieldDescription: string
   };
   order?: number;
-  // between?: {
-  //   fieldName: string;
-  //   value?: string | number | boolean;
-  // };
-  // groupable: boolean;
-  // checked?: boolean;
+  between?: {
+    fieldName: string;
+    value?: string | number | boolean;
+  };
+  groupable: boolean;
+  checked?: boolean;
+  grouped?: boolean;
 }
 

@@ -12,7 +12,7 @@ import {
 } from '../../z-form';
 import { ZReportProvider } from '../../z-report';
 import { ZReportDefinition, ZReportConfig } from '../../z-report/interfaces';
-import { ZReportFilter, ZReportMetadata } from '../interfaces';
+import { ZReportField, ZReportFilter, ZReportMetadata } from '../interfaces';
 
 export abstract class ZReportSource extends ZFormProvider implements ZReportProvider<any> {
 
@@ -141,5 +141,5 @@ export abstract class ZReportSource extends ZFormProvider implements ZReportProv
 
   public abstract getDataSelector(screen: string, filter: ZReportFilter): Observable<ZSearchResult<any>>;
 
-  public abstract getFilteredReportData(screen: string, filter: any): Observable<any[]>;
+  public abstract getFilteredReportData(screen: string, filter: any, fields?: ZReportField[]): Observable<any[]>;
 }

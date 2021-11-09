@@ -1,12 +1,13 @@
 import { Component } from '@angular/core';
-import { ZMenuProfile, ZModalService, ZMenuItems, ZTranslateService } from 'zmaterial';
+import { Observable, of } from 'rxjs';
+import { ZMenuProfile, ZModalService, ZMenuItems, ZTranslateService, ZMenuProvider } from 'zmaterial';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent {
+export class AppComponent implements ZMenuProvider {
 
   public currentProfile: ZMenuProfile = {
     descriptions: [
@@ -19,7 +20,7 @@ export class AppComponent {
       category: 'Cadastro',
       icon: 'add',
       itens: [
-        { label: 'Usuário', link: 'register/user' },
+        { label: 'Usuário', link: 'register/user', icon: 'home' },
         { label: 'Curso', link: 'register/course' }
       ]
     },
@@ -27,7 +28,7 @@ export class AppComponent {
       category: 'Relatório',
       icon: 'table_chart',
       itens: [
-        { label: 'Logs', link: 'report/logs' }
+        { label: 'Logs', link: 'report/logs' },
       ]
     },
     {
@@ -41,6 +42,12 @@ export class AppComponent {
 
   constructor(private zModal: ZModalService) {
 
+  }
+  get menus(): Observable<ZMenuItems[]> {
+    return of(this.currentMenus);
+  }
+  get profile(): Observable<ZMenuProfile> {
+    return of(this.currentProfile);
   }
 
   public logout(event: boolean): void {
