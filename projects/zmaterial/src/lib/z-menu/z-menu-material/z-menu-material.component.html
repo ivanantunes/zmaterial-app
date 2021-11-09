@@ -1,6 +1,6 @@
 <div *ngIf="menuItems && menuItems.length !== 0 else noProviderMenu">
   <div *ngIf="!hideSidebar else noMenu">
-    <mat-toolbar color="primary">
+    <mat-toolbar color="primary" class="mat-elevation-z4">
 
       <mat-toolbar-row>
 
@@ -97,7 +97,7 @@
 
 <ng-template #noMenu>
 
-  <mat-toolbar color="primary">
+  <mat-toolbar color="primary" class="mat-elevation-z4">
 
     <mat-toolbar-row>
 
