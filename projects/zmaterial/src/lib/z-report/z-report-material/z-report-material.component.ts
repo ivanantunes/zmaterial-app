@@ -119,7 +119,7 @@ export class ZReportMaterialComponent implements OnInit {
 
   public conversorFilter(value: string): string {
 
-    if (new Date(value)) {
+    if (new Date(value) !== null) {
       return new Date(value).toLocaleString();
     }
 
