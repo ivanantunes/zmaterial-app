@@ -46,7 +46,7 @@
       <!-- FILTROS -->
       <div *ngIf="getReportConfig.filters && getReportConfig.filters.length !== 0">
         <div *ngFor="let filter of getReportConfig.filters" class="container-filter-text">
-          <p class="filterText"><strong>{{filter.title}}:</strong> {{filter.value}}</p>
+          <p class="filterText"><strong>{{filter.title}}:</strong> {{conversorFilter(filter.value)}}</p>
         </div>
       </div>
 

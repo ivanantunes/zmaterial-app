@@ -116,4 +116,14 @@ export class ZReportMaterialComponent implements OnInit {
     }
     return grouped;
   }
+
+  public conversorFilter(value: string): string {
+
+    if (new Date(value)) {
+      return new Date(value).toLocaleString();
+    }
+
+    return value;
+
+  }
 }
