@@ -63,6 +63,12 @@ export const MetadataExemplo: ZReportMetadata = {
           fieldDescription: 'name',
           tableName: 'table',
         }
+      },
+      {
+        key: 'dateStar',
+        inputType: 'dateTime',
+        label: 'Dtata',
+        required: true,
       }
     ]
   }
