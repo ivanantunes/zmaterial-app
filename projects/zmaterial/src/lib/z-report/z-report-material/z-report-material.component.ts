@@ -1,14 +1,12 @@
-import { ZTranslateService } from '../../services/z-translate.service';
-import { ZReportConfig } from './../interfaces/z-report-config';
+import { ZTranslateService } from '../../services/';
 import { Component, Input, OnInit } from '@angular/core';
 import { ZReportProvider } from '../providers';
 import { catchError } from 'rxjs/operators';
 import { of } from 'rxjs';
 import { ZModalService } from '../../z-modal';
-import { ZReportDefinition } from '../interfaces';
+import { ZReportDefinition, ZReportConfig, ZReportField } from '../../interfaces';
 import { zPdfGenerator, zXlsxGenerator, zCsvGenerator } from '../functions';
-import { ZReportField } from '../../z-report-builder/interfaces';
-import { ZReportSource } from '../../z-report-builder/class/zReportSource';
+import { ZReportSource } from '../../class/';
 
 @Component({
   selector: 'z-report-material',

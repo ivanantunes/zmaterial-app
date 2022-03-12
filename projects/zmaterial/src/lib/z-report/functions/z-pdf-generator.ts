@@ -1,8 +1,8 @@
 import { ZTranslateService } from '../../services';
 import * as jsPDF from 'jspdf';
 import 'jspdf-autotable';
-import { ZReportConfig, ZReportDefinition } from '../interfaces';
-import { ZReportField } from '../../z-report-builder';
+import { ZReportConfig, ZReportDefinition } from '../../interfaces';
+import { ZReportField } from '../../interfaces';
 
 function pdfHeaderGenerator(author: string, title: string): any {
   return [

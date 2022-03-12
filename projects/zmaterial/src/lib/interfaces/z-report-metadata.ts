@@ -1,4 +1,4 @@
-import { ZReportConfig } from '../../z-report';
+import { ZReportConfig } from '../z-report';
 import { ZReportField } from './z-report-field';
 import { ZReportForm } from './z-report-form';
 

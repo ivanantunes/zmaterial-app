@@ -1,6 +1,6 @@
 import * as xlsx from 'xlsx';
 import { ZTranslateService } from '../../services';
-import { ZReportConfig, ZReportDefinition } from '../interfaces';
+import { ZReportConfig, ZReportDefinition } from '../../interfaces';
 
 export function zXlsxGenerator(
   config: ZReportConfig, definition: ZReportDefinition<any>[], data: any[], tService: ZTranslateService

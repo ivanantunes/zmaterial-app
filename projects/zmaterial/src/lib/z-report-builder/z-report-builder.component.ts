@@ -3,8 +3,8 @@ import { FormBuilder, FormGroup, FormArray, FormControl } from '@angular/forms';
 import { Component, Input, OnInit } from '@angular/core';
 import { ZTranslateService } from '../services';
 import { ZModalService } from '../z-modal';
-import { ZReportSource } from './class';
-import { ZReportField, ZReportMetadata } from './interfaces';
+import { ZReportSource } from '../class';
+import { ZReportField, ZReportMetadata } from '../interfaces';
 
 enum ReportBuilderTab {
   filter,
@@ -22,7 +22,7 @@ export class ZReportBuilderComponent implements OnInit {
   // ? Data Input
   @Input() source: ZReportSource;
   @Input() screen: string;
-  @Input() checks: ZReportField[];
+  @Input() checks: any[]; // ZReportField[];
 
   // ? DOM
   // @ViewChild('fields') fields: MatSelectionList;

@@ -4,6 +4,10 @@ export * from './lib/locale';
 export * from './lib/pipes/index';
 // ! Services
 export * from './lib/services/index';
+// ! Interfaces
+export * from './lib/interfaces';
+// ! Class
+export * from './lib/class';
 // ! Module
 export * from './lib/z.module';
 // ! z-modal

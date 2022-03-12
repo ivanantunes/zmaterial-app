@@ -1,6 +1,6 @@
 import { EventEmitter } from '@angular/core';
 import { Observable, of, throwError } from 'rxjs';
-import { ZTranslateService } from '../../services';
+import { ZTranslateService } from '../services';
 import {
   ZFormInputBase,
   ZFormProvider,
@@ -9,9 +9,9 @@ import {
   ZFormInputSelect,
   ZFormInputDateTime,
   ZSearchResult
-} from '../../z-form';
-import { ZReportProvider } from '../../z-report';
-import { ZReportDefinition, ZReportConfig } from '../../z-report/interfaces';
+} from '../z-form';
+import { ZReportProvider } from '../z-report';
+import { ZReportDefinition, ZReportConfig } from '../interfaces';
 import { ZReportField, ZReportFilter, ZReportMetadata } from '../interfaces';
 
 export abstract class ZReportSource extends ZFormProvider implements ZReportProvider<any> {

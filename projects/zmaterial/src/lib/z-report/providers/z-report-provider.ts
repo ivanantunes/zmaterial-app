@@ -1,5 +1,5 @@
 import { Observable } from 'rxjs';
-import { ZReportConfig, ZReportDefinition } from '../interfaces';
+import { ZReportConfig, ZReportDefinition } from '../../interfaces';
 
 export abstract class ZReportProvider<X> {
 
