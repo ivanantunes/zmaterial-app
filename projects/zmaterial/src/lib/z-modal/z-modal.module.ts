@@ -5,22 +5,19 @@ import { ZModalService } from './z-modal.service';
 import { ZModule } from '../z.module';
 
 @NgModule({
-  declarations: [
-    ZModalComponent
-  ],
-  imports: [
-    CommonModule,
-    // Module Global
-    ZModule
-  ],
-  exports: [
-    ZModalComponent
-  ],
-  providers: [
-    ZModalService
-  ],
-  entryComponents: [
-    ZModalComponent
-  ]
+    declarations: [
+        ZModalComponent
+    ],
+    imports: [
+        CommonModule,
+        // Module Global
+        ZModule
+    ],
+    exports: [
+        ZModalComponent
+    ],
+    providers: [
+        ZModalService
+    ]
 })
 export class ZModalModule { }
