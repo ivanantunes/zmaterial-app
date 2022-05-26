@@ -45,9 +45,11 @@
 
     </div>
 
+    <ng-container *ngTemplateOutlet="extraBody"></ng-container>
+
   </mat-card-content>
 
-  <mat-card-actions>
+  <mat-card-actions [ngClass]="alignActionRigth ? 'actions-rigth' : ''">
 
     <button mat-raised-button color="primary" type="submit" [disabled]="!form.valid || showLoading">
       {{ submitText }}

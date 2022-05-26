@@ -3,5 +3,10 @@
 [formProvider]="this"
 [showClearButton]="true"
 [submitText]="'Salvar Dados'"
+[alignActionRigth]="true"
 (submitValue)="saveData($event)"
-></z-form-material>
+>
+  <ng-template #extraBody>
+    <a href="#">Esqueci Minha Senha</a>
+  </ng-template>
+</z-form-material>

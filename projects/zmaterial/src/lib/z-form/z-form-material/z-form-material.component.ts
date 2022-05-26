@@ -19,11 +19,13 @@ export class ZFormMaterialComponent implements OnInit {
   @Input() showLoading: boolean;
   @Input() submitText: string;
   @Input() hideHeaderForm: boolean;
+  @Input() alignActionRigth: boolean;
 
   @Output() submitValue = new Subject<any>();
   @Output() formReady = new Subject<FormGroup>();
 
   @ContentChild('extraActions') extraActions: TemplateRef<ElementRef>;
+  @ContentChild('extraBody') extraBody: TemplateRef<ElementRef>;
 
   public formInputs: ZFormInputBase<any>[] = [];
   public defaultValues: any = {};
